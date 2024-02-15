@@ -1,6 +1,7 @@
 import React from 'react'
 import SidebarFooter from '@/components/ui/SidebarFooter'
 import SidebarAccordionAlerts from '@/components/ui/SidebarAccordionAlerts'
+import SidebarAccordionLog from '@/components/ui/SedebarAccordionLog'
 const SidebarContent = () => {
   return (
     <div className=' w-full h-screen  flex flex-col'>
@@ -9,7 +10,7 @@ const SidebarContent = () => {
             <h4>Hydrologiske varsler</h4>
             <SidebarAccordionAlerts />
             <h4>Varsel logg</h4>
-            <SidebarAccordionAlerts />
+            <SidebarAccordionLog />
         </div>
         
         
