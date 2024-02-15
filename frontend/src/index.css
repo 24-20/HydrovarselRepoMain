@@ -7,16 +7,16 @@
     --background: 0 0% 85%;
     --foreground: 0 0% 3.9%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card: 0 0% 0%;
+    --card-foreground: 220 14.29% 95.88%;
  
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
  
-    --primary: 0 0% 9%;
+    --primary: 217.22 91.22% 59.8%;
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 0 0% 96.1%;
+    --secondary: 213.12 93.9% 67.84%;
     --secondary-foreground: 0 0% 9%;
  
     --muted: 0 0% 96.1%;
@@ -67,10 +67,65 @@
 }
  
 @layer base {
-  * {
-    @apply border-border;
-  }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
   }
+  h1 {
+    margin: 0;
+    font-size: 40px;
+    letter-spacing: -2px;
+    color: hsl(var(--primary-foreground));
+    font-weight: 800;
+    letter-spacing: -3px;
+  }
+  h5 {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: normal;
+    color: hsl(var(--secondary-foreground));
+    margin-bottom: 5px;
+  }
+  h2 {
+    color: hsl(var(--primary-foreground));
+    margin-top: 20px;
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    opacity: 0.9;
+  }
+  h3 {
+    font-weight: 500;
+    font-size: 1.2em;
+    margin:0;
+  }
+  h4 {
+    font-size: 0.9em;
+  }
+  @media screen and (min-width: 650px) {
+    h1 {
+      font-size: 40px;
+    }
+    h2 {
+      font-size: 30px;
+      font-weight: 700;
+    }
+    h3 {
+      
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 16px;
+      color: #36393F;
+      opacity: 0.6;
+      font-weight: 600;
+      
+    }
+    
+    h5 {
+      font-size: 20px;
+    }
+  }
+
 }

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 const Sidebar = (props:{children:ReactNode}) => {
   return (
-    <div className=' w-[300px] h-screen bg-red-50 z-50 relative'>
+    <div className=' w-[300px] h-screen bg-card-foreground z-50 relative'>
         {
             props.children
         }
