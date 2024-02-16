@@ -7,7 +7,7 @@
     --background: 0 0% 85%;
     --foreground: 0 0% 3.9%;
 
-    --card: 0 0% 0%;
+    --card: 0 0% 100%;
     --card-foreground: 220 14.29% 95.88%;
  
     --popover: 0 0% 100%;
@@ -28,11 +28,11 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
+    --border: 217 33% 80.6%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
  
-    --radius: 0.5rem;
+    --radius: 8px;
   }
  
   .dark {
@@ -76,7 +76,7 @@
     margin: 0;
     font-size: 40px;
     letter-spacing: -2px;
-    color: hsl(var(--primary-foreground));
+    color: hsl(var(--foreground));
     font-weight: 800;
     letter-spacing: -3px;
   }
@@ -84,11 +84,11 @@
     font-size: 1em;
     font-weight: 400;
     line-height: normal;
-    color: hsl(var(--secondary-foreground));
+    color: hsl(var(--foreground));
     margin-bottom: 5px;
   }
   h2 {
-    color: hsl(var(--primary-foreground));
+    color: hsl(var(--foreground));
     margin-top: 20px;
     font-size: 22px;
     margin-bottom: 10px;
