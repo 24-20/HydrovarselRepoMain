@@ -6,8 +6,8 @@ interface SideBarProps {
 }
 const Sidebar = ({children, className}:SideBarProps) => {
   return (
-    <nav style={{transition:'0.2s'}} className={cn(className,` p-6 w-[300px] h-screen bg-card-foreground z-50 fixed border-r border-border transition-all `)}>
-        <div className=' flex justify-between'><h1 className=' text-foreground'>Logo</h1></div>
+    <nav style={{transition:'0.2s'}} className={cn(className,`w-[300px] h-screen bg-card-foreground z-50 fixed border-r border-border transition-all `)}>
+        
         {
             children
         }

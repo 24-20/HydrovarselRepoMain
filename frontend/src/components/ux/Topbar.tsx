@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import React, { ReactNode } from 'react'
 interface CardProps {
     children:ReactNode 
@@ -5,7 +6,7 @@ interface CardProps {
   }
 const Topbar = ({children, className=''}:CardProps) => {
   return (
-    <nav className=' fixed w-screen h-[100px]'>
+    <nav className={cn(className, ' fixed w-screen h-[80px] border-b border-border bg-card-foreground backdrop-blur-sm flex justify-between items-center px-6 sm:px-12')}>
         {
             children
         }
