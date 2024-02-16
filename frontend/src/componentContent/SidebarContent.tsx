@@ -5,7 +5,7 @@ import SidebarAccordionLog from '@/components/ui/SedebarAccordionLog'
 const SidebarContent = () => {
   return (
     <div className=' w-full h-screen  flex flex-col'>
-        <div className=' px-[10px] pt-[30px] w-full h-screen  flex flex-col gap-[15px] '>
+        <div className=' pt-[30px] w-full h-screen  flex flex-col gap-[15px] '>
             <h4>Hydrologiske varsler</h4>
             <SidebarAccordionAlerts />
             <h4>Varsel logg</h4>

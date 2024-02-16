@@ -1,10 +1,14 @@
+import { cn } from '@/lib/utils'
 import React, { ReactNode } from 'react'
-
-const DashboardLayout = (props:{children:ReactNode}) => {
+interface SideBarProps {
+    children:ReactNode 
+    className?:string // 👈️ marked optional
+  }
+const DashboardLayout = ({children, className}:SideBarProps) => {
   return (
-    <div className=' sm:pl-[300px] px-4 w-screen h-screen flex flex-wrap justify-center items-center '>
+    <div className={cn(className,`pr-4 w-screen h-screen flex flex-wrap justify-center items-center `)}>
         {
-            props.children
+            children
         }
     </div>
   )
