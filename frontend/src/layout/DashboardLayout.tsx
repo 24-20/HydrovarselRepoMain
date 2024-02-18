@@ -6,7 +6,7 @@ interface SideBarProps {
   }
 const DashboardLayout = ({children, className}:SideBarProps) => {
   return (
-    <div className={cn(className,`pr-4 w-screen h-screen flex flex-wrap justify-center items-center `)}>
+    <div className={cn(className,`pr-4 w-screen h-screen flex flex-col justify-center items-center gap-6 `)}>
         {
             children
         }
