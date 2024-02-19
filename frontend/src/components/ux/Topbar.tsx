@@ -6,7 +6,7 @@ interface CardProps {
   }
 const Topbar = ({children, className=''}:CardProps) => {
   return (
-    <nav className={cn(className, ' fixed w-screen h-[80px] border-b border-border bg-card-foreground backdrop-blur-sm flex justify-between items-center px-6 sm:px-12')}>
+    <nav className={cn(className, ' fixed z-50 w-screen h-[80px] border-b border-border bg-card-foreground backdrop-blur-sm flex justify-between items-center px-6 sm:px-12')}>
         {
             children
         }

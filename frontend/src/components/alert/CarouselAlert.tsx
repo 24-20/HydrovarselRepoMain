@@ -34,9 +34,7 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
               <CarouselItem key={index}>
                   
                   <div className='flex flex-grow h-[400px]  bg-card rounded-lg items-center flex-col'>
-                    <h2>Enkel varsling</h2>
                     {<AlertContent1/>}
-                    {index}
                   </div>
                   
               </CarouselItem>

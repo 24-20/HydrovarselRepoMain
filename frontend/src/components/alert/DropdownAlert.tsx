@@ -9,15 +9,15 @@ import {
 
 import React from 'react'
 import AlertButton from "../ui/AlertButton"
-
-const DropdownAlert = ({options:[]}) => {
+import { optionType } from "@/types/OptionType"
+const DropdownAlert = (props:{options:optionType | null, title:string}) => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
             <AlertButton>Open dropdown</AlertButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{props.title}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Billing</DropdownMenuItem>

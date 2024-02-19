@@ -42,7 +42,7 @@ const Dashboard = () => {
 
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver}} >
-          <DashboardLayout className={device1000px?'pl-[250px]':'pl-[2%] pt-[60px]'}>
+          <DashboardLayout className={device1000px?'pl-[250px]':'pl-[2%] pt-[700px]'}>
             <h1 className=' w-full max-w-[1326px] mt-[40px]'> Velkommen tilbake</h1>
             <button onClick={()=>carouselApi?.scrollTo(2)}>scroll to 2</button>
             <div className=' flex h-fit flex-col items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>

@@ -10,11 +10,13 @@ import {
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { Button } from '../ui/button'
-  
-const DrawerAlert = () => {
+
+import AlertButton from "../ui/AlertButton"
+import { optionType } from "@/types/OptionType"
+const DrawerAlert = (props:{options:optionType | null, title:string}) => {
   return (
     <Drawer>
-  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerTrigger><AlertButton>Open</AlertButton></DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Are you absolutely sure?</DrawerTitle>
