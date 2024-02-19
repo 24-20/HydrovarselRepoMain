@@ -23,7 +23,7 @@ const Dashboard = () => {
     setDashboardRiver(placeholderRiver)
   },[])
   return (
-    <div className=' w-screen min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground'>
+    <div className=' w-full min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
       
         <Sidebar className={!device1000px?'left-[-250px]':''}>
             <SidebarContent />
@@ -42,10 +42,10 @@ const Dashboard = () => {
 
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver}} >
-          <DashboardLayout className={device1000px?'pl-[250px]':'pl-[2%] pt-[700px]'}>
+          <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
             <h1 className=' w-full max-w-[1326px] mt-[40px]'> Velkommen tilbake</h1>
             <button onClick={()=>carouselApi?.scrollTo(2)}>scroll to 2</button>
-            <div className=' flex h-fit flex-col items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
+            <div className=' flex h-fit flex-col items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               <Card className='max-w-[500px]'>
                 <h2>Instillinger</h2>
