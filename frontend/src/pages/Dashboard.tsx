@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className=' w-full min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
       
-        <Sidebar className={!device1000px?'left-[-250px]':''}>
+        <Sidebar className={!device1000px?'left-[-300px]':''}>
             <SidebarContent />
         </Sidebar>
         <Topbar className={device1000px?' absolute  top-[-80px]':''}>
