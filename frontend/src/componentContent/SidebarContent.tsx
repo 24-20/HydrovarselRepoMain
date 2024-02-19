@@ -6,7 +6,7 @@ const SidebarContent = () => {
   return (
     <div className=' w-full h-screen  flex flex-col'>
         <div className=' flex justify-between'><h1 className=' text-foreground'>Logo</h1></div>
-        <div className=' px-8 pt-[30px] w-full h-screen  flex flex-col gap-[15px] '>
+        <div className=' px-4 pt-[30px] w-full h-screen  flex flex-col gap-[15px] '>
             <h4>Hydrologiske varsler</h4>
             <SidebarAccordionAlerts />
             <h4>Varsel logg</h4>

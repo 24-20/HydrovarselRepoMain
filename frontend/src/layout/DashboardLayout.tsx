@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 interface SideBarProps {
     children:ReactNode 
     className?:string // 👈️ marked optional

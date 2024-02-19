@@ -8,6 +8,7 @@ import {
   type CarouselApi
   
 } from "../ui/carousel"
+import { AlertContent1 } from '@/componentContent/AlertContent'
 
 const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: CarouselApi) => void) | undefined}) => {
   const [current, setCurrent] = React.useState(0)
@@ -34,6 +35,7 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
                   
                   <div className='flex flex-grow h-[400px]  bg-card rounded-lg items-center flex-col'>
                     <h2>Enkel varsling</h2>
+                    {<AlertContent1/>}
                     {index}
                   </div>
                   
