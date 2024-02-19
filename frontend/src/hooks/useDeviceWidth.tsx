@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 
 export default function useDeviceWidth() {
-    const [device600px, setDevice600px] = useState(false);
-    const [device1000px, setDevice1000px] = useState(false);
+    const [device600px, setDevice600px] = useState(window.innerWidth <= 600);
+    const [device1000px, setDevice1000px] = useState(window.innerWidth >= 1000);
     const updateState = () => {
         if (window.innerWidth <= 600){
             setDevice600px(true)
