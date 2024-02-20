@@ -92,37 +92,37 @@ const AlertContent1 = () => {
   return (
     
     <>
-    <h2>Enkel varsling</h2>
-    <div className=' md:w-[85%] w-[90%] h-auto  bg-card flex flex-wrap text text-foreground gap-3 sm:text-lg'>
-    <span>Send meg en</span>
-        {
-        device600px?
-        <DrawerAlert options={methodCopy} title='Varslings metode'  />
-        :
-        <DropdownAlert options={methodCopy} title='Varslings metode' />
-        }
-        <span>hvis</span>
-        {
-        device600px?
-        <DrawerAlert options={updatedParams} title='Parameter'  />
-        :
-        <DropdownAlert options={updatedParams} title='Parameter'   />
-        }
-        <span>til</span>
-        <Search />
-        <span>går</span>
-        {
-        device600px?
-        <DrawerAlert options={conditionalCopy} title='Betingelse' />
-        :
-        <DropdownAlert options={conditionalCopy} title='Betingelse' />
-        }
-        <div className='flex gap-3'>
-            <button>...</button>
-            <span>Meter.</span>
+        <h2>Enkel varsling</h2>
+        <div className=' md:w-[85%] w-[90%] h-auto  bg-card flex flex-wrap text-foreground gap-3 '>
+            <span>Send meg en</span>
+            {
+            device600px?
+            <DrawerAlert options={methodCopy} title='Varslings metode'  />
+            :
+            <DropdownAlert options={methodCopy} title='Varslings metode' />
+            }
+            <span>hvis</span>
+            {
+            device600px?
+            <DrawerAlert options={updatedParams} title='Parameter'  />
+            :
+            <DropdownAlert options={updatedParams} title='Parameter'   />
+            }
+            <span>til</span>
+            <Search />
+            <span>går</span>
+            {
+            device600px?
+            <DrawerAlert options={conditionalCopy} title='Betingelse' />
+            :
+            <DropdownAlert options={conditionalCopy} title='Betingelse' />
+            }
+            <div className='flex gap-3'>
+                <button>...</button>
+                <span>Meter.</span>
+            </div>
+        
         </div>
-      
-    </div>
     </>
   )
 }

@@ -6,7 +6,7 @@ interface SideBarProps {
 }
 const Sidebar = ({children, className}:SideBarProps) => {
   return (
-    <nav style={{transition:'0.2s'}} className={cn(className,`w-[300px] h-full bg-card-foreground z-50 fixed border-r border-border transition-all `)}>
+    <nav style={{transition:'0.2s'}} className={cn(className,`w-[250px] h-full bg-card-foreground z-50 fixed border-r border-border transition-all `)}>
         
         {
             children

@@ -65,7 +65,9 @@
     --ring: 0 0% 83.1%;
   }
 }
- 
+
+
+
 @layer base {
   
   body {
@@ -91,7 +93,7 @@
     color: hsl(var(--foreground));
     margin-top: 20px;
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-weight: 800;
     opacity: 0.9;
   }

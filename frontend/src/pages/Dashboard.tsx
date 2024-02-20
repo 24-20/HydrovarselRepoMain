@@ -12,6 +12,7 @@ import {
 import CarouselAlert from '@/components/alert/CarouselAlert'
 import { AlertRiverType } from '@/types/AlertRiverType'
 import { placeholderRiver } from '@/placeholders/placeholderRiver'
+import AlertAdvancedContent from '@/componentContent/AlertAdvancedContent'
 const DashboardRiverContext = React.createContext<null | {DashboardRiver:AlertRiverType | null, setDashboardRiver:Function }>(null)
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
@@ -23,16 +24,16 @@ const Dashboard = () => {
   return (
     <div className=' w-full min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
       
-        <Sidebar className={!device1000px?'left-[-300px]':''}>
-            <SidebarContent />
+        <Sidebar className={!device1000px?'left-[-250px]':''}>
+            <SidebarContent carouselApi={carouselApi}/>
         </Sidebar>
         <Topbar className={device1000px?' absolute  top-[-80px]':''}>
           <Sheet >
             <SheetTrigger>
               open sheet
             </SheetTrigger>
-            <SheetContent side={'left'} className=' w-[300px]'>
-              <SidebarContent />
+            <SheetContent side={'left'} className=' w-[250px]'>
+              <SidebarContent carouselApi={carouselApi}/>
             </SheetContent>
           </Sheet>
           <div className=' flex justify-between'><h1 className=' text-foreground'>Logo</h1></div>
@@ -40,13 +41,13 @@ const Dashboard = () => {
 
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver}} >
-          <DashboardLayout className={device1000px?'pl-[300px]':'pt-[60px]'}>
+          <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
             <h1 className=' w-full max-w-[1326px] mt-[40px]'> Velkommen tilbake</h1>
             <button onClick={()=>carouselApi?.scrollTo(2)}>scroll to 2</button>
             <div className=' flex h-fit flex-col items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               <Card className='max-w-[500px]'>
-                <h2>Instillinger</h2>
+                <AlertAdvancedContent />
               </Card>
             </div>
             <Card className='  max-w-[1326px] mb-[250px]'>
