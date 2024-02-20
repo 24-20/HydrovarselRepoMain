@@ -14,9 +14,7 @@ import { AlertRiverType } from '@/types/AlertRiverType'
 import { placeholderRiver } from '@/placeholders/placeholderRiver'
 const DashboardRiverContext = React.createContext<null | {DashboardRiver:AlertRiverType | null, setDashboardRiver:Function }>(null)
 const Dashboard = () => { 
-  const [toggleMenu, setToggleMenu] = useState(true)
   const {device600px, device1000px} = useDeviceWidth()
-  const [scrollToFunction, setScrollToFunction] = useState<Function | undefined>()
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
   const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
   useEffect(()=>{
@@ -42,7 +40,7 @@ const Dashboard = () => {
 
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver}} >
-          <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
+          <DashboardLayout className={device1000px?'pl-[300px]':'pt-[60px]'}>
             <h1 className=' w-full max-w-[1326px] mt-[40px]'> Velkommen tilbake</h1>
             <button onClick={()=>carouselApi?.scrollTo(2)}>scroll to 2</button>
             <div className=' flex h-fit flex-col items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
