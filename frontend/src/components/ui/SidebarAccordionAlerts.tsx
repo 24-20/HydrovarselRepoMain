@@ -27,6 +27,10 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
     console.log(current)
     setActiveAccordian(`item-${current+1}`)
   },[current])
+  useEffect(()=>{
+    if (!props.carouselApi?.selectedScrollSnap()) return
+    setCurrent(props.carouselApi?.selectedScrollSnap())
+  },[])
   return (
     <Accordion type="single" className="w-full" defaultValue={activeAccordian} value={activeAccordian} >
     <AccordionItem value="item-1">

@@ -38,7 +38,6 @@ const Dashboard = () => {
           </Sheet>
           <div className=' flex justify-between'><h1 className=' text-foreground'>Logo</h1></div>
         </Topbar>
-
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver}} >
           <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
