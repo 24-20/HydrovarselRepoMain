@@ -9,10 +9,11 @@ import {
   
 } from "../ui/carousel"
 import { AlertContent1 } from '@/componentContent/AlertContent'
-
+import AlertAdvancedContent from '@/componentContent/AlertAdvancedContent'
+import useDeviceWidth from '@/hooks/useDeviceWidth'
 const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: CarouselApi) => void) | undefined}) => {
   const [current, setCurrent] = React.useState(0)
-  
+  const {device600px} = useDeviceWidth()
   React.useEffect(() => {
     if (!props.carouselApi) {
       return
@@ -28,14 +29,19 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
     return (
        
 
-        <Carousel className=" shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] rounded-lg w-[96vw] sm:w-[96%] min-w-[300px] h-[400px] relative " setApi={props.setCarouselApi}>
+        <Carousel className=" shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] rounded-lg w-[96vw] sm:w-[96%] min-w-[300px] min-h-[400px] relative " setApi={props.setCarouselApi}>
           <CarouselContent className=' h-full'>
               {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
                   
-                  <div className='flex flex-grow h-[400px]  bg-card rounded-lg items-center flex-col'>
+                  <div className='flex flex-grow min-h-[400px]  bg-card rounded-lg items-center flex-col'>
                     {<AlertContent1/>}
                     {index}
+                    {
+                      device600px &&
+                      <AlertAdvancedContent />
+                    }
+
                   </div>
                   
               </CarouselItem>

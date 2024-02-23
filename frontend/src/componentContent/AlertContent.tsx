@@ -10,7 +10,9 @@ import parameterMap from '@/maps/parameterMap'
 import { DashboardRiverContext } from '@/pages/Dashboard'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
 import { optionType } from '@/types/OptionType'
-import Search from '@/components/alert/Search'
+
+import DialogAlert from '@/components/alert/DialogAlert'
+  
 const AlertContent1 = () => {
     const [updatedParams, setUpdatedParams] = useState<optionType | null>(null)
     const context = React.useContext(DashboardRiverContext)
@@ -109,7 +111,10 @@ const AlertContent1 = () => {
             <DropdownAlert options={updatedParams} title='Parameter'   />
             }
             <span>til</span>
-            <Search />
+
+            <DialogAlert />
+
+            
             <span>går</span>
             {
             device600px?
