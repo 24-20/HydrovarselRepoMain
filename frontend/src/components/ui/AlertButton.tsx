@@ -7,7 +7,7 @@ interface CardProps {
 const AlertButton = ({children, className=''}:CardProps) => {
     
   return (
-    <button className='border border-border bg-card-foreground shadow-md px-4 h-[34px] flex gap-2 items-center rounded-lg md:text-lg font-medium outline-none'>
+    <button className='border border-border bg-card-foreground shadow-md px-4 h-[34px] flex gap-2 items-center rounded-lg lg:text-lg outline-none'>
         {children}
         <ChevronDown className=' text-foreground/70'/>
     </button>

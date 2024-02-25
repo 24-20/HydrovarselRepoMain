@@ -36,7 +36,6 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
                   
                   <div className='flex flex-grow min-h-[400px]  bg-card rounded-lg items-center flex-col'>
                     {<AlertContent1/>}
-                    {index}
                     {
                       device600px &&
                       <AlertAdvancedContent />
@@ -48,8 +47,8 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
               ))}
           </CarouselContent>
             
-          <CarouselNext className=' right-4'/>
-          <CarouselPrevious className='left-4'/>
+          <CarouselNext className=' right-0'/>
+          <CarouselPrevious className='left-0'/>
             
             
         </Carousel>

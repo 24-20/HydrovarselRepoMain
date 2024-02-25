@@ -12,6 +12,7 @@ import useDeviceWidth from '@/hooks/useDeviceWidth'
 import { optionType } from '@/types/OptionType'
 
 import DialogAlert from '@/components/alert/DialogAlert'
+import PrimaryButton from '@/components/ui/PrimaryButton'
   
 const AlertContent1 = () => {
     const [updatedParams, setUpdatedParams] = useState<optionType | null>(null)
@@ -92,10 +93,11 @@ const AlertContent1 = () => {
     }, [availableParams])
 
   return (
-    
     <>
-        <h2>Enkel varsling</h2>
-        <div className=' md:w-[85%] w-[90%] h-auto  bg-card flex flex-wrap text-foreground gap-3 '>
+    <h2 >Enkel varsling</h2>
+    <div className=' flex items-center flex-col gap-6 flex-grow'>
+        
+        <div className=' md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
             <span>Send meg en</span>
             {
             device600px?
@@ -128,7 +130,12 @@ const AlertContent1 = () => {
             </div>
         
         </div>
+        <PrimaryButton>
+            Lagre varsel
+        </PrimaryButton>
+    </div>
     </>
+
   )
 }
 const AlertContent2 = () => {

@@ -49,7 +49,7 @@ const AlertAdvancedContent = () => {
     
   return (
     <div className='text-foreground flex flex-col items-center mb-10'>
-        <h2 >Instillinger</h2>
+        <h2 >Alternative Instillinger</h2>
         <div className='flex flex-col'>
           <div className='flex gap-4'>
           <span>Nedkjøling:</span> 
@@ -64,7 +64,7 @@ const AlertAdvancedContent = () => {
           <span>Legg til notat:</span> <AlertButton> add notat</AlertButton>
           </div>
         </div>
-        <div className='flex items-center gap-4 h-8 mt-10 '>
+        <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>
           <div style={{backgroundColor:checkbox?'hsl(198.4 93.2% 59.6%)':''}} className={' opacity-85 w-5 h-5 bg-background border border-primary transition duration-200 flex justify-center items-center '}
            onClick={()=>{setCheckbox(!checkbox)}} ><FontAwesomeIcon icon={faCheck} size='sm' color={checkbox?'#fff':'#020817'} className='transition duration-200' /></div>
           <span className='m-0'>Slett varsel etter det aktiveres.</span>
