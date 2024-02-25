@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function useDeviceWidth() {
     const [device600px, setDevice600px] = useState(window.innerWidth <= 640);
-    const [device1000px, setDevice1000px] = useState(window.innerWidth >= 1000);
+    const [device1000px, setDevice1000px] = useState(window.innerWidth >= 1024);
     const updateState = () => {
         if (window.innerWidth <= 640){
             setDevice600px(true)
@@ -13,7 +13,7 @@ export default function useDeviceWidth() {
         } else {
             setDevice600px(false)
         }
-        if (window.innerWidth >= 1000){
+        if (window.innerWidth >= 1024){
             setDevice1000px(true)
             return
         } else {

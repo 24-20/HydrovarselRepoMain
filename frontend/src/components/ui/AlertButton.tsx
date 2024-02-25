@@ -1,16 +1,20 @@
 import React, {ReactNode} from 'react'
-import { ChevronDown } from 'lucide-react'
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 interface CardProps {
     children:ReactNode 
     className?:string // 👈️ marked optional
+    icon?:IconDefinition
   }
-const AlertButton = ({children, className=''}:CardProps) => {
+const AlertButton = ({children, className='', icon=faChevronDown}:CardProps) => {
     
   return (
-    <button className='border border-border bg-card-foreground shadow-md px-4 h-[34px] flex gap-2 items-center rounded-lg lg:text-lg outline-none'>
+    <div className='border border-border bg-card-foreground shadow-md px-4 h-[34px] flex gap-2 items-center rounded-lg lg:text-lg'>
         {children}
-        <ChevronDown className=' text-foreground/70'/>
-    </button>
+        <FontAwesomeIcon className=' text-foreground/70' size='sm' icon={icon}/>
+    </div>
   )
 }
 

@@ -8,7 +8,6 @@ const searchFiltering = async (inp:string, stations:stationDataRawType[] | undef
     const oneres: {}[] = []
     const twores: {}[] = []
     if (!stations) return []
-    console.log(stations)
     stations.map((element)=>{
         
         let firstLetters = element.stationName.substring(0, newSearch.length)

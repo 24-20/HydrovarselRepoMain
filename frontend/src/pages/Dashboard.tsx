@@ -34,12 +34,14 @@ const Dashboard = () => {
   useEffect(()=>{console.log(stations)},[stations])
 
   return (
-    <div className=' w-full min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
+    <div className=' w-full lg:pt-[80px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
       
         <Sidebar className={!device1000px?'left-[-250px]':''}>
             <SidebarContent carouselApi={carouselApi}/>
         </Sidebar>
-        <Topbar className={device1000px?' absolute  top-[-80px]':''}>
+        <Topbar className={' absolute  top-[0]'}>
+          {
+            !device1000px&&
           <Sheet >
             <SheetTrigger>
               open sheet
@@ -48,12 +50,17 @@ const Dashboard = () => {
               <SidebarContent carouselApi={carouselApi}/>
             </SheetContent>
           </Sheet>
-          <div className=' flex justify-between'><h1 className=' text-foreground'>Logo</h1></div>
+          }
+          
+          <div className=' flex justify-between'><h1 className=' text-white'>Logo</h1></div>
+            
+          
+          
         </Topbar>
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations}} >
           <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
-            <h1 className=' w-full max-w-[1326px] mt-[40px]'> Velkommen tilbake</h1>
+            <h1 className=' w-full max-w-[1326px] mt-[40px] text-background'>  1</h1>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {
@@ -63,7 +70,7 @@ const Dashboard = () => {
                 </Card>
               }
             </div>
-            <Card className='  max-w-[1326px] mb-[250px]'>
+            <Card className='  max-w-[1326px] mb-[250px] mt-[40px]'>
               <h2>Eiby elva graf</h2>
             </Card>
           </DashboardLayout >

@@ -13,11 +13,17 @@ import { optionType } from '@/types/OptionType'
 
 import DialogAlert from '@/components/alert/DialogAlert'
 import PrimaryButton from '@/components/ui/PrimaryButton'
+import AlertInput from '@/components/ui/AlertInput'
   
 const AlertContent1 = () => {
+    const [method, setMethod] = useState<'Sms'|'Email'>('Email')
+    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannføring')
+    const [conditiona, setConditional] = useState<'Over'| 'Under'>('Over')
+
     const [updatedParams, setUpdatedParams] = useState<optionType | null>(null)
     const context = React.useContext(DashboardRiverContext)
     const [availableParams, setAvailableParams] = useState<undefined | string[]>()
+    const [activateAlert, setActivateAlert] = useState(false)
     const {device600px} = useDeviceWidth()
     const methodCopy = [
         {
@@ -66,12 +72,10 @@ const AlertContent1 = () => {
             icon:faArrowDown
         }
     ]
-
     useEffect(()=>{ // updating available params
         if (!context?.DashboardRiver) return
         const seriesList = context.DashboardRiver.seriesList
         const newlist = []
-        console.log(seriesList)
         for (let i in seriesList) {
             newlist.push(seriesList[i].parameterName)
         }
@@ -101,16 +105,16 @@ const AlertContent1 = () => {
             <span>Send meg en</span>
             {
             device600px?
-            <DrawerAlert options={methodCopy} title='Varslings metode'  />
+            <DrawerAlert update={activateAlert} updateState={setMethod} updateInstant={false} options={methodCopy} title='Varslings metode'  />
             :
-            <DropdownAlert options={methodCopy} title='Varslings metode' />
+            <DropdownAlert update={activateAlert} updateState={setMethod} updateInstant={false} options={methodCopy} title='Varslings metode' />
             }
             <span>hvis</span>
             {
             device600px?
-            <DrawerAlert options={updatedParams} title='Parameter'  />
+            <DrawerAlert update={activateAlert} updateState={setParameter} updateInstant={true} options={updatedParams} title='Parameter'  />
             :
-            <DropdownAlert options={updatedParams} title='Parameter'   />
+            <DropdownAlert update={activateAlert} updateState={setParameter} updateInstant={true} options={updatedParams} title='Parameter'   />
             }
             <span>til</span>
 
@@ -120,18 +124,20 @@ const AlertContent1 = () => {
             <span>går</span>
             {
             device600px?
-            <DrawerAlert options={conditionalCopy} title='Betingelse' />
+            <DrawerAlert update={activateAlert} updateState={setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
             :
-            <DropdownAlert options={conditionalCopy} title='Betingelse' />
+            <DropdownAlert update={activateAlert} updateState={setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
             }
             <div className='flex gap-3'>
-                <button>...</button>
-                <span>Meter.</span>
+                <AlertInput type='number' placeholder='000'/>
+                <span>{parameterMap(parameter)[0]}</span>
             </div>
         
         </div>
-        <PrimaryButton>
+        <PrimaryButton >
+            <div onClick={()=>setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>
             Lagre varsel
+            </div>
         </PrimaryButton>
     </div>
     </>

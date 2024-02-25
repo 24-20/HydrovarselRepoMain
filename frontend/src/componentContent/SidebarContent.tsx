@@ -6,7 +6,6 @@ import { CarouselApi } from '@/components/ui/carousel'
 const SidebarContent = (props:{carouselApi:CarouselApi}) => {
   return (
     <div className=' w-full h-full  flex flex-col relative '>
-        <div className=' flex justify-between h-[10%] max-h-[60px]'><h1 className=' text-foreground'>Logo</h1></div>
         <div className=' px-4 pt-[30px] w-full gap-[15px] h-[100%] overflow-y-auto
           [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-gray-100
