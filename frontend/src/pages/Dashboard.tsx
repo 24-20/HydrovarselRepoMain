@@ -1,5 +1,5 @@
 import SidebarContent from '@/componentContent/SidebarContent'
-import Card from '@/components/alert/Card'
+import Card from '@/components/ui/Card'
 import { SheetContent, SheetTrigger, Sheet } from '@/components/ui/sheet'
 import Sidebar from '@/components/ux/Sidebar'
 import Topbar from '@/components/ux/Topbar'
@@ -9,21 +9,34 @@ import React, { useEffect, useState } from 'react'
 import {
   type CarouselApi
 } from "@/components/ui/carousel"
-import CarouselAlert from '@/components/alert/CarouselAlert'
+import CarouselAlert from '@/components/ux/CarouselAlert'
 import { placeholderRiver } from '@/placeholders/placeholderRiver'
 import AlertAdvancedContent from '@/componentContent/AlertAdvancedContent'
 import { AlertRiverType } from '@/types/AlertRiverType'
 import { getStations } from '@/lib/getStations'
 import { DashboardRiverContextType } from '@/types/DashboardRiverContextType'
+import { DashboardUserAlertDataType } from '@/types/DashboardUserAlertData'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
+const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
   const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
+
+  //DashboardUserAlertData State
+  const [method, setMethod] = useState<'Sms'|'Email'>('Email')
+    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannføring')
+    const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
+    const [inputValue, setInputValue] = useState<number | null>(null)
+    const [cooldown, setCooldown] = useState<string>('1 time')
+    const [note, setNote] = useState<string | null>(null)
+    const [activateAlert, setActivateAlert] = useState(false)
+
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
   },[])
   const [stations, setStations] = useState<[] | undefined>()
+  
   useEffect(()=>{
     async function updatestationstate() {
       const stationAwait = await getStations()
@@ -59,6 +72,7 @@ const Dashboard = () => {
         </Topbar>
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations}} >
+        <DashboardUserAlertDataContext.Provider value={{setMethod, setParameter,setConditional,setInputValue, setCooldown, setNote, parameter, setActivateAlert, activateAlert}}>
           <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
             <h1 className=' w-full max-w-[1326px] mt-[40px] text-background'>  1</h1>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
@@ -74,10 +88,11 @@ const Dashboard = () => {
               <h2>Eiby elva graf</h2>
             </Card>
           </DashboardLayout >
+        </DashboardUserAlertDataContext.Provider>
         </DashboardRiverContext.Provider>
         
     </div>
   )
 }
-export {DashboardRiverContext}
+export {DashboardRiverContext, DashboardUserAlertDataContext}
 export default Dashboard

@@ -4,26 +4,25 @@ import { faBell, faBolt, faMobileScreen, faEnvelope, faHouseFloodWaterCircleArro
    faWater, faTemperatureHigh, faTemperatureLow,faArrowDown, faArrowUp, faDroplet, faBridgeWater} from '@fortawesome/free-solid-svg-icons'
 
 import { ChevronDown } from 'lucide-react'
-import DropdownAlert from '@/components/alert/DropdownAlert'
-import DrawerAlert from '@/components/alert/DrawerAlert'
+import DropdownAlert from '@/components/ux/DropdownAlert'
+import DrawerAlert from '@/components/ux/DrawerAlert'
 import parameterMap from '@/maps/parameterMap'
 import { DashboardRiverContext } from '@/pages/Dashboard'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
 import { optionType } from '@/types/OptionType'
 
-import DialogAlert from '@/components/alert/DialogAlert'
+import DialogAlert from '@/components/ux/DialogAlert'
 import PrimaryButton from '@/components/ui/PrimaryButton'
 import AlertInput from '@/components/ui/AlertInput'
-  
+import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
 const AlertContent1 = () => {
-    const [method, setMethod] = useState<'Sms'|'Email'>('Email')
-    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannføring')
-    const [conditiona, setConditional] = useState<'Over'| 'Under'>('Over')
-
+    const userDatacontext = React.useContext(DashboardUserAlertDataContext)
+    
+    const riverDatacontext = React.useContext(DashboardRiverContext)
+    
+    if (!userDatacontext) return
     const [updatedParams, setUpdatedParams] = useState<optionType | null>(null)
-    const context = React.useContext(DashboardRiverContext)
     const [availableParams, setAvailableParams] = useState<undefined | string[]>()
-    const [activateAlert, setActivateAlert] = useState(false)
     const {device600px} = useDeviceWidth()
     const methodCopy = [
         {
@@ -73,14 +72,14 @@ const AlertContent1 = () => {
         }
     ]
     useEffect(()=>{ // updating available params
-        if (!context?.DashboardRiver) return
-        const seriesList = context.DashboardRiver.seriesList
+        if (!riverDatacontext?.DashboardRiver) return
+        const seriesList = riverDatacontext.DashboardRiver.seriesList
         const newlist = []
         for (let i in seriesList) {
             newlist.push(seriesList[i].parameterName)
         }
         setAvailableParams(newlist)
-    },[context?.DashboardRiver])
+    },[riverDatacontext?.DashboardRiver])
 
     useEffect(() => { // updating updated params when available params has been updated
         if (!availableParams) return
@@ -105,16 +104,16 @@ const AlertContent1 = () => {
             <span>Send meg en</span>
             {
             device600px?
-            <DrawerAlert update={activateAlert} updateState={setMethod} updateInstant={false} options={methodCopy} title='Varslings metode'  />
+            <DrawerAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setMethod} updateInstant={false} options={methodCopy} title='Varslings metode'  />
             :
-            <DropdownAlert update={activateAlert} updateState={setMethod} updateInstant={false} options={methodCopy} title='Varslings metode' />
+            <DropdownAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setMethod} updateInstant={false} options={methodCopy} title='Varslings metode' />
             }
             <span>hvis</span>
             {
             device600px?
-            <DrawerAlert update={activateAlert} updateState={setParameter} updateInstant={true} options={updatedParams} title='Parameter'  />
+            <DrawerAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setParameter} updateInstant={true} options={updatedParams} title='Parameter'  />
             :
-            <DropdownAlert update={activateAlert} updateState={setParameter} updateInstant={true} options={updatedParams} title='Parameter'   />
+            <DropdownAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setParameter} updateInstant={true} options={updatedParams} title='Parameter'   />
             }
             <span>til</span>
 
@@ -124,18 +123,18 @@ const AlertContent1 = () => {
             <span>går</span>
             {
             device600px?
-            <DrawerAlert update={activateAlert} updateState={setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
+            <DrawerAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
             :
-            <DropdownAlert update={activateAlert} updateState={setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
+            <DropdownAlert update={userDatacontext.activateAlert} updateState={userDatacontext.setConditional} updateInstant={false} options={conditionalCopy} title='Betingelse' />
             }
             <div className='flex gap-3'>
-                <AlertInput type='number' placeholder='000'/>
-                <span>{parameterMap(parameter)[0]}</span>
+                <AlertInput type='number' placeholder='000' update={userDatacontext.activateAlert} updateState={userDatacontext.setInputValue}/>
+                <span>{parameterMap(userDatacontext.parameter)[0]}</span>
             </div>
         
         </div>
         <PrimaryButton >
-            <div onClick={()=>setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>
+            <div onClick={()=>userDatacontext.setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>
             Lagre varsel
             </div>
         </PrimaryButton>

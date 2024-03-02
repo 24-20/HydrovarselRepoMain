@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faGear, faCheck } from '@fortawesome/free-solid-svg-icons'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
-import DropdownAlert from '@/components/alert/DropdownAlert'
-import DrawerAlert from '@/components/alert/DrawerAlert'
+import DropdownAlert from '@/components/ux/DropdownAlert'
+import DrawerAlert from '@/components/ux/DrawerAlert'
 import AlertButton from '@/components/ui/AlertButton'
+import AlertInput from '@/components/ui/AlertInput'
+import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
 const AlertAdvancedContent = () => {
+  
+  const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     const {device600px} = useDeviceWidth()
     const [checkbox, setCheckbox] = useState(false)
+  if (!userDatacontext) return
   const CooldownCopy = [
     {
         value:'1 time',
@@ -51,17 +56,17 @@ const AlertAdvancedContent = () => {
     <div className='text-foreground flex flex-col items-center mb-10'>
         <h2 >Alternative Instillinger</h2>
         <div className='flex flex-col'>
-          <div className='flex gap-4'>
+          <div className='flex gap-4 '>
           <span>Nedkjøling:</span> 
           {
             device600px?
-            <DrawerAlert options={CooldownCopy} title='Varslings metode'  />
+            <DrawerAlert options={CooldownCopy} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false} />
             :
-            <DropdownAlert options={CooldownCopy} title='Varslings metode' />
+            <DropdownAlert options={CooldownCopy} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false}/>
         }
           </div>
-          <div className='flex gap-4 mt-6'>
-          <span>Legg til notat:</span> <AlertButton> add notat</AlertButton>
+          <div className='flex gap-4 mt-6 '>
+            <span>Legg til notat:</span> <AlertInput type='text' placeholder='legg til notat' updateState={userDatacontext.setNote} update={userDatacontext.activateAlert} />
           </div>
         </div>
         <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>
