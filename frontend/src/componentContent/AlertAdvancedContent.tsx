@@ -50,6 +50,8 @@ const AlertAdvancedContent = () => {
   value:'24 timer',
   icon:faClock
 }
+
+
     ]
     
   return (
@@ -66,7 +68,7 @@ const AlertAdvancedContent = () => {
         }
           </div>
           <div className='flex gap-4 mt-6 '>
-            <span>Legg til notat:</span> <AlertInput type='text' placeholder='legg til notat' updateState={userDatacontext.setNote} update={userDatacontext.activateAlert} />
+            <span>Legg til notat:</span> <AlertInput type='text' placeholder='Noter..' updateState={userDatacontext.setNote} update={userDatacontext.activateAlert} />
           </div>
         </div>
         <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>
