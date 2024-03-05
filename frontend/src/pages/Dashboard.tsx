@@ -1,4 +1,4 @@
-import SidebarContent from '@/componentContent/SidebarContent'
+import SidebarContent from '@/content/SidebarContent'
 import Card from '@/components/ui/Card'
 import { SheetContent, SheetTrigger, Sheet } from '@/components/ui/sheet'
 import Sidebar from '@/components/ux/Sidebar'
@@ -11,20 +11,25 @@ import {
 } from "@/components/ui/carousel"
 import CarouselAlert from '@/components/ux/CarouselAlert'
 import { placeholderRiver } from '@/placeholders/placeholderRiver'
-import AlertAdvancedContent from '@/componentContent/AlertAdvancedContent'
+import AlertAdvancedContent from '@/content/AlertAdvancedContent'
 import { AlertRiverType } from '@/types/AlertRiverType'
 import { getStations } from '@/lib/getStations'
 import { DashboardRiverContextType } from '@/types/DashboardRiverContextType'
 import { DashboardUserAlertDataType } from '@/types/DashboardUserAlertData'
+import Graph from '@/components/ux/Graph'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
+import parameterMap from '@/maps/parameterMap'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
-  const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
 
   //DashboardUserAlertData State
-  const [method, setMethod] = useState<'Sms'|'Email'>('Email')
+  
+    const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
+    const [method, setMethod] = useState<'Sms'|'Email'>('Email')
     const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannføring')
     const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
     const [inputValue, setInputValue] = useState<number | null>(null)
@@ -84,8 +89,15 @@ const Dashboard = () => {
                 </Card>
               }
             </div>
-            <Card className='  max-w-[1326px] mb-[250px] mt-[40px]'>
-              <h2>Eiby elva graf</h2>
+            <Card className='  max-w-[1326px] mb-[250px] h-fit sm:p-4 py-4'>
+              <div className=' flex justify-between w-full  px-6 my-2 '>
+                <div> <h4 className=' m-0'>{parameter}</h4><h2 className=' m-0'>{DashboardRiver?.stationName}</h2></div>
+                <div className=' flex flex-col gap-2 md:gap-6 md:flex-row items-center'>
+                  <h4>Siste 31 dager <FontAwesomeIcon icon={faClock}/></h4>
+                  {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
+                </div>
+              </div>
+              <Graph parameter={parameter} />
             </Card>
           </DashboardLayout >
         </DashboardUserAlertDataContext.Provider>

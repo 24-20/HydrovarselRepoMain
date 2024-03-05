@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchContent from '@/componentContent/DialogSearchContent'
+import SearchContent from '@/content/DialogSearchContent'
 import {
     Dialog,
     DialogContent,
