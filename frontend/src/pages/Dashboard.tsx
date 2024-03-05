@@ -1,6 +1,6 @@
 import SidebarContent from '@/content/SidebarContent'
 import Card from '@/components/ui/Card'
-import { SheetContent, SheetTrigger, Sheet } from '@/components/ui/sheet'
+import { SheetContent, SheetTrigger, Sheet, SheetClose } from '@/components/ui/sheet'
 import Sidebar from '@/components/ux/Sidebar'
 import Topbar from '@/components/ux/Topbar'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
@@ -18,19 +18,21 @@ import { DashboardRiverContextType } from '@/types/DashboardRiverContextType'
 import { DashboardUserAlertDataType } from '@/types/DashboardUserAlertData'
 import Graph from '@/components/ux/Graph'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faUser } from '@fortawesome/free-solid-svg-icons'
 import parameterMap from '@/maps/parameterMap'
+import SideMenuContent from '@/content/SideMenuContent'
+import { ChevronDown, ChevronRight, Menu, Plus } from 'lucide-react'
+import TopbarItem from '@/components/ui/TopbarItem'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
-
   //DashboardUserAlertData State
   
     const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
     const [method, setMethod] = useState<'Sms'|'Email'>('Email')
-    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannføring')
+    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannstand')
     const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
     const [inputValue, setInputValue] = useState<number | null>(null)
     const [cooldown, setCooldown] = useState<string>('1 time')
@@ -52,7 +54,7 @@ const Dashboard = () => {
   useEffect(()=>{console.log(stations)},[stations])
 
   return (
-    <div className=' w-full lg:pt-[80px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden '>
+    <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
       
         <Sidebar className={!device1000px?'left-[-250px]':''}>
             <SidebarContent carouselApi={carouselApi}/>
@@ -61,26 +63,57 @@ const Dashboard = () => {
           {
             !device1000px&&
           <Sheet >
-            <SheetTrigger>
-              open sheet
+            <SheetTrigger >
+              <div className=' p-2 flex'>Varslinger <ChevronRight /></div>
             </SheetTrigger>
             <SheetContent side={'left'} className=' w-[250px]'>
               <SidebarContent carouselApi={carouselApi}/>
+              <SheetClose >
+                <h1>close</h1>
+              </SheetClose>
             </SheetContent>
           </Sheet>
           }
           
-          <div className=' flex justify-between'><h1 className=' text-white'>Logo</h1></div>
+          <div className=' flex justify-between h-full gap-2'>
+            <h1 className=' text-white'>Logo</h1>
+            {
+              device1000px&&
+              
+            <TopbarItem><ChevronDown /> Om tjenesten</TopbarItem>
+            }
+          </div>
+          
+          {
+          device1000px&&
+          <div className=' flex h-full relative'>
             
+              <TopbarItem> <Plus size={22}/> Ny varsel</TopbarItem>
+              <TopbarItem>Mine varsler</TopbarItem>
+              <TopbarItem><FontAwesomeIcon icon={faUser}/>Konto</TopbarItem>
+          </div>
+          }
+          {
+          !device1000px&&
+          <Sheet >
+            <SheetTrigger>
+              <div className=' p-2.5 bg-blue-700 rounded-lg'>
+                  <Menu />
+              </div>
+            </SheetTrigger>
+            <SheetContent side={'right'} className=' max-w-[500px] w-full'>
+            <SideMenuContent/>
+            </SheetContent>
+          </Sheet>
+          }
           
           
         </Topbar>
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, setParameter,setConditional,setInputValue, setCooldown, setNote, parameter, setActivateAlert, activateAlert}}>
-          <DashboardLayout className={device1000px?'pl-[250px]':'pt-[60px]'}>
-            <h1 className=' w-full max-w-[1326px] mt-[40px] text-background'>  1</h1>
-            <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%]   max-w-[1326px] gap-6'>
+          <DashboardLayout className={`${device1000px?'pl-[250px] pt-6':'pt-[104px]'} mb-6`}>
+            <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {
                 !device600px && 
@@ -89,11 +122,12 @@ const Dashboard = () => {
                 </Card>
               }
             </div>
-            <Card className='  max-w-[1326px] mb-[250px] h-fit sm:p-4 py-4'>
+            <Card className='  max-w-[1326px] h-fit sm:p-4 py-4 flex-grow-0'>
               <div className=' flex justify-between w-full  px-6 my-2 '>
-                <div> <h4 className=' m-0'>{parameter}</h4><h2 className=' m-0'>{DashboardRiver?.stationName}</h2></div>
-                <div className=' flex flex-col gap-2 md:gap-6 md:flex-row items-center'>
-                  <h4>Siste 31 dager <FontAwesomeIcon icon={faClock}/></h4>
+                <div><h2 className=' m-0 mb-6'>{DashboardRiver?.stationName}</h2></div>
+                <div className=' flex flex-col gap-2 md:gap-6 md:flex-row items-center relative mb-6'>
+                  <h4 className=' m-0'>{parameter}</h4>
+                  <h2 className=' m-0 absolute top-6 right-1 text-[34px] w-fit'> { `1.45`+parameterMap(parameter)[0]}</h2>
                   {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
                 </div>
               </div>

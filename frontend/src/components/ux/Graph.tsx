@@ -31,9 +31,9 @@ import parameterMap from "@/maps/parameterMap";
       }: TooltipProps<ValueType, NameType>) => {
         if (active) {
         return (
-            <div className=" bg-background p-4 rounded-lg">
-            <p className=" text-lg">{`${label}`}</p>
-            <p className="text-xl font-semibold">{`${payload?.[0].value?.toString().substring(0,5)} ${parameterMap(props.parameter)[0]}`}</p>
+            <div className=" bg-card-foreground border border-border shadow-xl p-4 rounded-lg">
+            <h4 className=" text-lg">{`${label}`}</h4>
+            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0].value?.toString().substring(0,5)} ${parameterMap(props.parameter)[0]}`}</h2>
             </div>
         );
         }
@@ -42,12 +42,12 @@ import parameterMap from "@/maps/parameterMap";
       };
     
     return (
-      <div style={{ width: '100%', height: 450, }}>
+      <div className=" w-full h-[250px]" >
         <ResponsiveContainer >
           <AreaChart data={data}>
             <defs>
               <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.6} />
+                <stop offset="0%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.8} />
                 <stop offset="75%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.05} />
               </linearGradient>
             </defs>
@@ -72,12 +72,11 @@ import parameterMap from "@/maps/parameterMap";
               axisLine={false}
               tickLine={false}
               tickCount={8}
-              tickFormatter={(number) => `$${number.toFixed(2)}`}
+              tickFormatter={(number) => `${number.toFixed(2)}`}
             />
   
             <Tooltip content={<CustomTooltip />} />
   
-            <CartesianGrid opacity={0.4} vertical={false} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

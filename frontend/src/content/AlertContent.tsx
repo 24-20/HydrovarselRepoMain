@@ -100,7 +100,7 @@ const AlertContent1 = () => {
     <h2 >Enkel varsling</h2>
     <div className=' flex items-center flex-col gap-6 flex-grow'>
         
-        <div className=' md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
+        <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
             <span>Send meg en</span>
             {
             device600px?
