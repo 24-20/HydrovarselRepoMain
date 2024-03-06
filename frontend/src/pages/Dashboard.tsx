@@ -131,7 +131,7 @@ const Dashboard = () => {
                   {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
                 </div>
               </div>
-              <Graph parameter={parameter} />
+              <Graph parameter={parameter} DashboardRiver={DashboardRiver} />
             </Card>
           </DashboardLayout >
         </DashboardUserAlertDataContext.Provider>

@@ -14,6 +14,9 @@ import {
     NameType,
   } from 'recharts/types/component/DefaultTooltipContent';
 import parameterMap from "@/maps/parameterMap";
+import { AlertRiverType } from "@/types/AlertRiverType";
+import { useEffect } from "react";
+import { getMeasurments } from "@/lib/getMesurments";
   const data = [] as {}[]
   for (let num = 30; num >= 0; num--) {
     data.push({
@@ -21,8 +24,8 @@ import parameterMap from "@/maps/parameterMap";
       value: 1 + Math.random(),
     });
   }
-  
-  export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'}) {
+
+  export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null}) {
     
       const CustomTooltip = ({
         active,
@@ -40,6 +43,15 @@ import parameterMap from "@/maps/parameterMap";
   
         return null;
       };
+
+      useEffect(()=>{
+        const asyncfunc = async () => {
+          if (!props.DashboardRiver) return
+          let data = await getMeasurments({'StationId':props.DashboardRiver.stationId, 'parameter':props.parameter, 'resolution_time':'60',reference_time:'P31D/'} )
+          console.log(data)
+        }
+        asyncfunc()
+      },[props.DashboardRiver])
     
     return (
       <div className=" w-full h-[250px]" >
@@ -51,7 +63,7 @@ import parameterMap from "@/maps/parameterMap";
                 <stop offset="75%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.05} />
               </linearGradient>
             </defs>
-  
+
             <Area dataKey="value" stroke="#2451B7" fill="url(#color)" />
   
             <XAxis
