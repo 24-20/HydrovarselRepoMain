@@ -15,18 +15,12 @@ import {
   } from 'recharts/types/component/DefaultTooltipContent';
 import parameterMap from "@/maps/parameterMap";
 import { AlertRiverType } from "@/types/AlertRiverType";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMeasurments } from "@/lib/getMesurments";
-  const data = [] as {}[]
-  for (let num = 30; num >= 0; num--) {
-    data.push({
-      date: subDays(new Date(), num).toISOString().substr(0, 10),
-      value: 1 + Math.random(),
-    });
-  }
+  
 
   export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null}) {
-    
+      const [data, setData] = useState<{data:{date:string, value:number}[] | [],highest:number,lowest:number}>({data:[],highest:1,lowest:0})
       const CustomTooltip = ({
         active,
         payload,
@@ -36,7 +30,7 @@ import { getMeasurments } from "@/lib/getMesurments";
         return (
             <div className=" bg-card-foreground border border-border shadow-xl p-4 rounded-lg">
             <h4 className=" text-lg">{`${label}`}</h4>
-            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0].value?.toString().substring(0,5)} ${parameterMap(props.parameter)[0]}`}</h2>
+            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0]?.value?.toString().substring(0,5)} ${parameterMap(props.parameter)[0]}`}</h2>
             </div>
         );
         }
@@ -47,8 +41,22 @@ import { getMeasurments } from "@/lib/getMesurments";
       useEffect(()=>{
         const asyncfunc = async () => {
           if (!props.DashboardRiver) return
-          let data = await getMeasurments({'StationId':props.DashboardRiver.stationId, 'parameter':props.parameter, 'resolution_time':'60',reference_time:'P31D/'} )
-          console.log(data)
+          let data = await getMeasurments({'StationId':props.DashboardRiver.stationId, 'parameter':parameterMap(props.parameter)[1], 'resolution_time':'60',reference_time:'P31D/'} )
+          const observations = data[0].observations
+          const datacleaned = []
+          let lowest = 0
+          let highest = 1000
+          for (let i = 0; i<observations.length;i++) {
+            datacleaned.push({date:observations[i].time, value : observations[i].value})
+            if (observations[i].value > highest) {
+              highest = observations[i].value;
+            }
+            if (observations[i].value < lowest) {
+                lowest = observations[i].value;
+            }
+          }
+          setData({data:datacleaned,highest,lowest})
+
         }
         asyncfunc()
       },[props.DashboardRiver])
@@ -56,7 +64,7 @@ import { getMeasurments } from "@/lib/getMesurments";
     return (
       <div className=" w-full h-[250px]" >
         <ResponsiveContainer >
-          <AreaChart data={data}>
+          <AreaChart data={data.data}>
             <defs>
               <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.8} />
@@ -85,6 +93,7 @@ import { getMeasurments } from "@/lib/getMesurments";
               tickLine={false}
               tickCount={8}
               tickFormatter={(number) => `${number.toFixed(2)}`}
+              domain={[]}
             />
   
             <Tooltip content={<CustomTooltip />} />

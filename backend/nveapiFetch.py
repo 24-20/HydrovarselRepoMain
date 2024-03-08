@@ -3,6 +3,8 @@ import json
 async def nveapiFetch(reqdata):
     #1000 = vannstand, 1001 = discharge, water tempratur = 1003, air tempratur = 17
     print('------------------')
+    
+    #return reqdata
     print(reqdata)
     StationId = reqdata['StationId']
     parameter = reqdata['parameter']
@@ -22,6 +24,5 @@ async def nveapiFetch(reqdata):
     parsed_result = json.loads(content)
 
 
-    
     return parsed_result
     
