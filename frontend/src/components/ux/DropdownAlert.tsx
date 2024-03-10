@@ -15,7 +15,7 @@ import { optionType } from "@/types/OptionType"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const DropdownAlert = (props:{options:optionType | null, title:string, update:boolean, updateInstant:boolean, updateState:Function}) => {
   
-  const [activeOption, setActiveOption] = useState<null | string>('')
+  const [activeOption, setActiveOption] = useState<null | string>(null)
   useEffect(()=>{
     if (!props.options) {
       setActiveOption('utilgjengelig')
@@ -30,6 +30,12 @@ const DropdownAlert = (props:{options:optionType | null, title:string, update:bo
       props.updateState(activeOption)
     }
   },[props.update])
+  useEffect(()=>{
+    if (props.updateInstant && activeOption != 'utilgjengelig' && activeOption) {
+      
+      props.updateState(activeOption)
+    }
+  },[activeOption])
   let i = 0
   return (
     <DropdownMenu>

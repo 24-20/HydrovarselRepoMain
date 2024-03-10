@@ -109,7 +109,7 @@ import { getMeasurments } from "@/lib/getMesurments";
           </AreaChart>
         </ResponsiveContainer>
         :
-        <h5 className=" ml-6">{dataError?'Server not responding':'No data fro period'} <span className=" text-destructive">(error)</span></h5>
+        <h5 className=" ml-6">{dataError?'Server not responding':'Ingen data for periode'} {dataError&&<span className=" text-destructive">(error)</span>}</h5>
         }
       </div>
     );

@@ -22,13 +22,19 @@ const DrawerAlert = (props:{options:optionType | null, title:string, update:bool
     } else {
       setActiveOption(props.options[0].value)
     }
-  },[])
+  },[props.options])
   useEffect(()=>{
     if (props.update) {
       console.log('iuyhbafhl')
       props.updateState(activeOption)
     }
   },[props.update])
+  useEffect(()=>{
+    if (props.updateInstant && activeOption != 'utilgjengelig' && activeOption) {
+      console.log(activeOption)
+      props.updateState(activeOption)
+    }
+  },[activeOption])
   let i = 0
   return (
     <Drawer>
