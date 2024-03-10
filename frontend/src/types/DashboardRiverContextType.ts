@@ -5,5 +5,6 @@ import { stationDataRawType } from './stationDataRawType'
 export type DashboardRiverContextType = {
     DashboardRiver:AlertRiverType | null,
     setDashboardRiver:Function,
-    stations:stationDataRawType[] | undefined 
+    stations:stationDataRawType[] | undefined ,
+    stationsError:boolean
 }

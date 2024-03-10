@@ -28,6 +28,8 @@ const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertData
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
+  const [stations, setStations] = useState<[] | undefined>()
+  const [stationsError, setStationsError] = useState<boolean>(false)
   //DashboardUserAlertData State
   
     const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
@@ -42,16 +44,21 @@ const Dashboard = () => {
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
   },[])
-  const [stations, setStations] = useState<[] | undefined>()
   
   useEffect(()=>{
     async function updatestationstate() {
       const stationAwait = await getStations()
-      setStations(stationAwait)
+      if (stationAwait?.error) {
+        setStationsError(true)
+        return 
+      } else {
+        setStationsError(false)
+        setStations(stationAwait)
+      }
+      
     }
     updatestationstate()
   },[])
-  useEffect(()=>{console.log(stations)},[stations])
 
   return (
     <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
@@ -110,8 +117,8 @@ const Dashboard = () => {
           
         </Topbar>
       
-        <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations}} >
-        <DashboardUserAlertDataContext.Provider value={{setMethod, setParameter,setConditional,setInputValue, setCooldown, setNote, parameter, setActivateAlert, activateAlert}}>
+        <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError}} >
+        <DashboardUserAlertDataContext.Provider value={{setMethod, setParameter ,setConditional,setInputValue, setCooldown, setNote, parameter, setActivateAlert, activateAlert}}>
           <DashboardLayout className={`${device1000px?'pl-[250px] pt-6':'pt-[104px]'} mb-6`}>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>

@@ -21,6 +21,7 @@ import { getMeasurments } from "@/lib/getMesurments";
 
   export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null}) {
       const [data, setData] = useState<{data:{date:string, value:number}[] | [],highest:number,lowest:number}>({data:[],highest:1,lowest:0})
+      const [dataError, setDataError] = useState<boolean>(false)
       const CustomTooltip = ({
         active,
         payload,
@@ -42,6 +43,11 @@ import { getMeasurments } from "@/lib/getMesurments";
         const asyncfunc = async () => {
           if (!props.DashboardRiver) return
           let data = await getMeasurments({'StationId':props.DashboardRiver.stationId, 'parameter':parameterMap(props.parameter)[1], 'resolution_time':'60',reference_time:'P31D/'} )
+          if (data?.error) {
+            setDataError(true)
+            return
+          } //checing if error
+          setDataError(false)
           const observations = data[0].observations
           const datacleaned = []
           let lowest = 0
@@ -59,11 +65,13 @@ import { getMeasurments } from "@/lib/getMesurments";
 
         }
         asyncfunc()
-      },[props.DashboardRiver])
+      },[props.DashboardRiver, props.parameter])
     
     return (
       <div className=" w-full h-[250px]" >
-        <ResponsiveContainer >
+        {
+          !dataError && data.data.length>0?
+          <ResponsiveContainer >
           <AreaChart data={data.data}>
             <defs>
               <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
@@ -100,6 +108,9 @@ import { getMeasurments } from "@/lib/getMesurments";
   
           </AreaChart>
         </ResponsiveContainer>
+        :
+        <h5 className=" ml-6">{dataError?'Server not responding':'No data fro period'} <span className=" text-destructive">(error)</span></h5>
+        }
       </div>
     );
   }

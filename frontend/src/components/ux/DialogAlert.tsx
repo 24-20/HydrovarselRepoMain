@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchContent from '@/content/DialogSearchContent'
+import DialogSearchContent from '@/content/DialogSearchContent'
 import {
     Dialog,
     DialogContent,
@@ -15,12 +15,12 @@ import AlertButton from '@/components/ui/AlertButton'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 const DialogAlert = () => {
     
-    const {DashboardRiver, setDashboardRiver, stations} = React.useContext(DashboardRiverContext) as DashboardRiverContextType
+    const {DashboardRiver, setDashboardRiver, stations, stationsError} = React.useContext(DashboardRiverContext) as DashboardRiverContextType
   return (
     <Dialog>
         <DialogTrigger><AlertButton icon={faSearch}>{DashboardRiver?.stationName}</AlertButton></DialogTrigger>
         <DialogContent className='bg-card-foreground'>
-            <SearchContent DashboardRiver={DashboardRiver} setDashboardRiver={setDashboardRiver} stationData={stations}/>
+            <DialogSearchContent DashboardRiver={DashboardRiver} setDashboardRiver={setDashboardRiver} stationData={stations} stationsError={stationsError}/>
         </DialogContent>
     </Dialog>
   )

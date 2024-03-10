@@ -5,7 +5,10 @@ import React, {useState, useEffect} from 'react'
 import { DialogClose } from '@/components/ui/dialog'
 import searchFiltering from '@/lib/searchFiltering'
 import { stationDataRawType } from '@/types/stationDataRawType'
-const SearchContent = (props:{DashboardRiver:AlertRiverType | null, setDashboardRiver:Function, stationData:stationDataRawType[] | undefined}) => {
+import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
+const DialogSearchContent = (props:{DashboardRiver:AlertRiverType | null, setDashboardRiver:Function, stationData:stationDataRawType[] | undefined , stationsError:boolean}) => {
+    const context = React.useContext(DashboardUserAlertDataContext)
+
     const [q, setq] = useState<string>('')
     const [showAll, setShowAll] = useState<boolean>(false)
     const [isSearching, setIsSearching] = React.useState(false);
@@ -31,46 +34,59 @@ const SearchContent = (props:{DashboardRiver:AlertRiverType | null, setDashboard
           [&::-webkit-scrollbar-track]:bg-gray-100
           [&::-webkit-scrollbar-thumb]:bg-gray-300 px-4 py-2 '>
             
-                <div className=' h-auto  w-12/12 outline-none flex p-2 items-center bg-background/80 rounded justify-between mb-2'>
-                    {props.DashboardRiver?.stationName}
-                </div>
+                {
+                    !props.stationsError?
+                    <>
+                    <div className=' h-auto  w-12/12 outline-none flex p-2 items-center bg-background/80 rounded justify-between mb-2'>
+                        {props.DashboardRiver?.stationName}
+                    </div>
                 
 
-                {q.length >0 && 
-                    <div className='flex justify-between items-center'>
-                        <h5 className='mt-0 text-lg'>Resultater <span>{(results?.length>10)?(!showAll)?`(10 av ${results.length})`:`(${results.length} av ${results.length})`: `(${results.length} av ${results.length})`}</span></h5>
-                        <button className='bg-primary/80 p-1' onClick={()=>setShowAll(prev=>!prev)}>{!showAll?'Vis alle':'Vis mindre'}</button>
-                    </div>
+                    {q.length >0 && 
+                        <div className='flex justify-between items-center'>
+                            <h5 className='mt-0 text-lg'>Resultater <span>{(results?.length>10)?(!showAll)?`(10 av ${results.length})`:`(${results.length} av ${results.length})`: `(${results.length} av ${results.length})`}</span></h5>
+                            <button className='bg-primary/80 p-1' onClick={()=>setShowAll(prev=>!prev)}>{!showAll?'Vis alle':'Vis mindre'}</button>
+                        </div>
+                    }
+                    
+                    {
+                        results.map((res:any)=>{
+                            i +=1
+                            if (i>(!showAll?10:9999)){
+                                return
+                            }
+                        return (
+                            <DialogClose key={res.stationId}>
+                            <div className=' h-auto  w-12/12 outline-none flex p-2 items-center hover:bg-background rounded justify-between'
+                                onClick={()=>{
+                                    console.log(res)
+                                    props.setDashboardRiver(res)
+                                    context?.setParameter(res.seriesList[0].parameterName)
+                                    
+                                }}>
+                                <div className='flex gap-1.5'>
+                                    {res.stationName}
+                                    
+                                    <span className='text-sm  m-0'>{`(${res.kommune})`}</span>
+                                </div>
+                                <FontAwesomeIcon icon={faArrowRight} />
+                            </div>
+                            </DialogClose>
+                        )
+                        })
+                    }
+                    </>
+                    :
+                    <div>err</div>
                 }
                 
-                {
-                    results.map((res:any)=>{
-                        i +=1
-                        if (i>(!showAll?10:9999)){
-                            return
-                        }
-                    return (
-                        <DialogClose key={res.stationId}>
-                        <div className=' h-auto  w-12/12 outline-none flex p-2 items-center hover:bg-background rounded justify-between'
-                            onClick={()=>{
-                                props.setDashboardRiver(res)
-                                
-                            }}>
-                            <div className='flex gap-1.5'>
-                                {res.stationName}
-                                
-                                <span className='text-sm  m-0'>{`(${res.kommune})`}</span>
-                            </div>
-                            <FontAwesomeIcon icon={faArrowRight} />
-                        </div>
-                        </DialogClose>
-                    )
-                    })
-                }
             </div>
         </div>
+        
+        
+        
             
     )
 }
 
-export default SearchContent
+export default DialogSearchContent
