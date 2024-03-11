@@ -21,7 +21,6 @@ const AlertContent = (props:{index:number}) => {
     if (!userDatacontext) return
     const [updatedParams, setUpdatedParams] = useState<optionType | null>(null)
     const [availableParams, setAvailableParams] = useState<undefined | string[]>()
-    const {device600px} = useDeviceWidth()
     useEffect(()=>{ // updating available params
         if (!riverDatacontext?.DashboardRiver) return
         const seriesList = riverDatacontext.DashboardRiver.seriesList

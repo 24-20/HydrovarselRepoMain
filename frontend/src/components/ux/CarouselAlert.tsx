@@ -35,7 +35,7 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
               {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
                   
-                  <div className='flex flex-grow min-h-[350px]  bg-card rounded-lg items-center flex-col'>
+                  <div className='flex  min-h-[350px] h-full  bg-card rounded-lg items-center flex-col'>
                     {<AlertContent index={index}/>}
                     {
                       device600px &&

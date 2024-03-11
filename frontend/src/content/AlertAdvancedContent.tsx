@@ -7,52 +7,14 @@ import DrawerAlert from '@/components/ux/DrawerAlert'
 import AlertButton from '@/components/ui/AlertButton'
 import AlertInput from '@/components/ui/AlertInput'
 import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
+import AlertOptionsFunc from './options/AlertOptions'
 const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings:Function}) => {
-  
+  const AlertOptions = AlertOptionsFunc()
   const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     const {device600px, device1000px} = useDeviceWidth()
     const [checkbox, setCheckbox] = useState(false)
   if (!userDatacontext) return
-  const CooldownCopy = [
-    {
-        value:'1 time',
-        icon:faClock,
-        
-    },
-    {
-        value:'2 timer',
-        icon:faClock
-    },
-    {
-      value:'3 timer',
-      icon:faClock,
-      
-  },
-  {
-      value:'4 timer',
-      icon:faClock
-  },
-  {
-    value:'5 timer',
-    icon:faClock,
-    
-},
-{
-    value:'6 timer',
-    icon:faClock
-},
-{
-  value:'12 timer',
-  icon:faClock,
-  
-},
-{
-  value:'24 timer',
-  icon:faClock
-}
 
-
-    ]
     
   return (
     <div className='text-foreground flex flex-col items-center mb-10'>
@@ -71,9 +33,9 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
             <span>Nedkjøling:</span> 
             {
               device600px?
-              <DrawerAlert options={CooldownCopy} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false} />
+              <DrawerAlert options={AlertOptions.CooldownOptions} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false} />
               :
-              <DropdownAlert options={CooldownCopy} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false}/>
+              <DropdownAlert options={AlertOptions.CooldownOptions} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false}/>
           }
             </div>
             <div className='flex gap-4 mt-6 '>
