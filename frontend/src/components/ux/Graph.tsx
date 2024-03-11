@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { getMeasurments } from "@/lib/getMesurments";
   
 
-  export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null}) {
+  export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null,setRecentRiverValue:Function}) {
       const [data, setData] = useState<{data:{date:string, value:number}[] | [],highest:number,lowest:number}>({data:[],highest:1,lowest:0})
       const [dataError, setDataError] = useState<boolean>(false)
       const CustomTooltip = ({
@@ -31,14 +31,14 @@ import { getMeasurments } from "@/lib/getMesurments";
         return (
             <div className=" bg-card-foreground border border-border shadow-xl p-4 rounded-lg">
             <h4 className=" text-lg">{`${label}`}</h4>
-            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0]?.value?.toString().substring(0,5)} ${parameterMap(props.parameter)[0]}`}</h2>
+            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0]?.value} ${parameterMap(props.parameter)[0]}`}</h2>
             </div>
         );
         }
   
         return null;
       };
-
+      
       useEffect(()=>{
         const asyncfunc = async () => {
           if (!props.DashboardRiver) return
@@ -49,6 +49,10 @@ import { getMeasurments } from "@/lib/getMesurments";
           } //checing if error
           setDataError(false)
           const observations = data[0].observations
+          //updating recentrivervalues
+          props.setRecentRiverValue((observations[observations.length-1]?.value)?observations[observations.length-1]?.value:'Utilgjengelig')
+
+
           const datacleaned = []
           let lowest = 0
           let highest = 1000

@@ -7,12 +7,11 @@ import DrawerAlert from '@/components/ux/DrawerAlert'
 import AlertButton from '@/components/ui/AlertButton'
 import AlertInput from '@/components/ui/AlertInput'
 import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
-const AlertAdvancedContent = () => {
+const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings:Function}) => {
   
   const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     const {device600px, device1000px} = useDeviceWidth()
     const [checkbox, setCheckbox] = useState(false)
-    const [displaySettings, setDisplaySettings] = useState<boolean>(false)
   if (!userDatacontext) return
   const CooldownCopy = [
     {
@@ -57,15 +56,15 @@ const AlertAdvancedContent = () => {
     
   return (
     <div className='text-foreground flex flex-col items-center mb-10'>
-        <div className=' flex items-center gap-2'><h2 className={`m-${!(displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
+        <div className=' flex items-center gap-2'><h2 className={`m-${!(props.displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
           {
             device600px&&
-            <div onClick={()=>setDisplaySettings(prev=>!prev)} className=' p-2 mb-2 bg-card-foreground rounded-lg'>
-            {displaySettings?<FontAwesomeIcon icon={faEye}/>:<FontAwesomeIcon icon={faEyeSlash}/>}
+            <div onClick={()=>props.setDisplaySettings((prev:boolean)=>!prev)} className=' p-2 mb-2 bg-card-foreground rounded-lg'>
+            {props.displaySettings?<FontAwesomeIcon icon={faEye}/>:<FontAwesomeIcon icon={faEyeSlash}/>}
           </div>
           }
         </div>
-        {(displaySettings || !device600px)?
+        {(props.displaySettings || !device600px)?
         <>
           <div className='flex flex-col'>
             <div className='flex gap-4 '>

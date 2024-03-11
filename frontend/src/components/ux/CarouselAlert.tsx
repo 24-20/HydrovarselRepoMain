@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import {
   Carousel,
   CarouselContent,
@@ -8,11 +8,12 @@ import {
   type CarouselApi
   
 } from "../ui/carousel"
-import { AlertContent1 } from '@/content/AlertContent'
+import { AlertContent } from '@/content/AlertContent'
 import AlertAdvancedContent from '@/content/AlertAdvancedContent'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
 const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: CarouselApi) => void) | undefined}) => {
   const [current, setCurrent] = React.useState(0)
+  const [displaySettings, setDisplaySettings] = useState<boolean>(false)
   const {device600px} = useDeviceWidth()
   React.useEffect(() => {
     if (!props.carouselApi) {
@@ -35,10 +36,10 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
               <CarouselItem key={index}>
                   
                   <div className='flex flex-grow min-h-[350px]  bg-card rounded-lg items-center flex-col'>
-                    {<AlertContent1/>}
+                    {<AlertContent index={index}/>}
                     {
                       device600px &&
-                      <AlertAdvancedContent />
+                      <AlertAdvancedContent setDisplaySettings={setDisplaySettings} displaySettings={displaySettings}/>
                     }
 
                   </div>

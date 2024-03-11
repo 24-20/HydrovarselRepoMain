@@ -40,7 +40,7 @@ const Dashboard = () => {
     const [cooldown, setCooldown] = useState<string>('1 time')
     const [note, setNote] = useState<string | null>(null)
     const [activateAlert, setActivateAlert] = useState(false)
-
+    const [recentRiverValue, setRecentRiverValue] = useState(0)
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
   },[])
@@ -60,6 +60,7 @@ const Dashboard = () => {
     updatestationstate()
   },[])
 
+  const [displaySettings, setDisplaySettings] = useState<boolean>(false)
   return (
     <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
       
@@ -118,14 +119,15 @@ const Dashboard = () => {
         </Topbar>
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError}} >
-        <DashboardUserAlertDataContext.Provider value={{setMethod, setParameter ,setConditional,setInputValue, setCooldown, setNote, parameter, setActivateAlert, activateAlert}}>
+        <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
+          setInputValue, setCooldown, setNote, setActivateAlert, activateAlert}}>
           <DashboardLayout className={`${device1000px?'pl-[250px] pt-6':'pt-[104px]'} mb-6`}>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {
                 !device600px && 
                 <Card className='max-w-[500px]'>
-                  <AlertAdvancedContent />
+                  <AlertAdvancedContent setDisplaySettings={setDisplaySettings} displaySettings={displaySettings}/>
                 </Card>
               }
             </div>
@@ -134,11 +136,11 @@ const Dashboard = () => {
                 <div><h2 className=' m-0 mb-6'>{DashboardRiver?.stationName}</h2></div>
                 <div className=' flex flex-col gap-2 md:gap-6 md:flex-row items-center relative mb-6'>
                   <h4 className=' m-0'>{parameter}</h4>
-                  <h2 className=' m-0 absolute top-6 right-1 text-[34px] w-fit'> { `1.45`+parameterMap(parameter)[0]}</h2>
+                  <h2 className=' m-0 absolute top-6 right-1 text-[34px] w-fit'> { recentRiverValue+parameterMap(parameter)[0]}</h2>
                   {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
                 </div>
               </div>
-              <Graph parameter={parameter} DashboardRiver={DashboardRiver} />
+              <Graph parameter={parameter} DashboardRiver={DashboardRiver} setRecentRiverValue={setRecentRiverValue}/>
             </Card>
           </DashboardLayout >
         </DashboardUserAlertDataContext.Provider>
