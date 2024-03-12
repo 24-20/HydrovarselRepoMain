@@ -1,6 +1,6 @@
 import {auth, db} from './firebaseConfig'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { doc, setDoc, addDoc, updateDoc } from "firebase/firestore"; 
+import { doc, setDoc, addDoc, updateDoc,  documentId } from "firebase/firestore"; 
 import { collection, query, where, getDocs, getDoc } from "firebase/firestore";
 import { DocumentData } from 'firebase/firestore';
 async function SearchStations () {
@@ -91,17 +91,19 @@ async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
 
     if (NotificationIds === undefined) return undefined
 
-    for (let i = 0; i<NotificationIds.length;i++) {
-        const notifdoc = doc(db, 'Notifications1',NotificationIds[i])
-        const notif = await getDoc(notifdoc) 
-        if (!notif.data())console.log(NotificationIds[i])
-        const notifdata = notif.data() 
-        const updatedNotifObj = {...notifdata, id:NotificationIds[i]}
+    
+    const notifdoc = collection(db, 'Notifications1')
+    const notif = await getDocs(query(notifdoc, where(documentId(),'in',NotificationIds)))
+    notif.forEach((i)=>{
+        let notifdata = i.data()
+        const updatedNotifdata = {...notifdata, id:notifdata.id}
         //filtering notification after type
-        const alerttype = notifdata?.alerttype as '1'|  '2' | '3'|'4'
-        notificationData[alerttype]?.push(updatedNotifObj)
+        const alerttype = notifdata?.alerttype as '1'| '2' | '3'|'4'
+        notificationData[alerttype]?.push(updatedNotifdata)
+    })
+    
         
-    }
+    
     return notificationData    
     
     
