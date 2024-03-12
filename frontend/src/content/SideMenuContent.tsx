@@ -1,5 +1,6 @@
 import MenuItemBig from '@/components/ui/MenuItemBig'
 import MenuItemSmall from '@/components/ui/MenuItemSmall'
+import { signInWithEandP } from '@/firebase/firebaseUtils'
 import { faHandshake, faSmile } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
@@ -26,6 +27,7 @@ const SideMenuContent = () => {
             <FontAwesomeIcon icon={faHandshake}/>
         </MenuItemBig>
         </div>
+        <button onClick={()=>signInWithEandP('test.mail@gmail.com', 'test123')}>Sign in</button>
     </div>
   )
 }

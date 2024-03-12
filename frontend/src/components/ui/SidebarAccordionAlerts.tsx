@@ -9,9 +9,12 @@ import { Battery, BookOpen, BookOpenText, Hourglass, Percent } from 'lucide-reac
 import { CarouselApi } from './carousel'
   
 const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
-  const [current, setCurrent] = React.useState(0)
-  const [activeAccordian, setActiveAccordian] = React.useState<string| undefined>(undefined)
-  React.useEffect(() => {
+  const [current, setCurrent] = useState(0)
+  const [activeAccordian, setActiveAccordian] = useState<string| undefined>(undefined)
+
+
+  //Carousel and accordian functionality
+  useEffect(() => {
     if (!props.carouselApi) {
       return
     }
@@ -21,16 +24,17 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
       }
       setCurrent(props.carouselApi.selectedScrollSnap() )
     })
-    console.log('runnoing')
   }, [props.carouselApi])
+
   useEffect(()=>{
-    console.log(current)
     setActiveAccordian(`item-${current+1}`)
   },[current])
+
   useEffect(()=>{
     if (!props.carouselApi?.selectedScrollSnap()) return
     setCurrent(props.carouselApi?.selectedScrollSnap())
   },[])
+
   return (
     <Accordion type="single" className="w-full" defaultValue={activeAccordian} value={activeAccordian} >
     <AccordionItem value="item-1">
@@ -39,7 +43,9 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
         props.carouselApi?.scrollTo(0)
         }}> <div className=' flex items-center gap-2'><BookOpen size={16} /> Enkel varsling</div></AccordionTrigger>
       <AccordionContent>
-        Yes. It adheres to the WAI-ARIA design pattern. {}
+        {
+          
+        }
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">

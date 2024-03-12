@@ -72,7 +72,7 @@ import { getMeasurments } from "@/lib/getMesurments";
       },[props.DashboardRiver, props.parameter])
     
     return (
-      <div className=" w-full h-[250px]" >
+      <div className=" w-full h-[400px] md:h-[250px]" >
         {
           !dataError && data.data.length>0?
           <ResponsiveContainer >

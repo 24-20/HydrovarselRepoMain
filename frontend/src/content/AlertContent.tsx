@@ -10,9 +10,9 @@ import PrimaryButton from '@/components/ui/PrimaryButton'
 import AlertInput from '@/components/ui/AlertInput'
 import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
 import UserActionAlert from '@/components/ux/UserActionAlert'
-import AlertContent1 from './alertContentTypes/AlertContent1'
+import AlertContent1Edit from './alertContentTypes/edit/AlertContent1Edit'
 import AlertOptionsFunc from './options/AlertOptions'
-import AlertContent2 from './alertContentTypes/AlertContent2'
+import AlertContent2Edit from './alertContentTypes/edit/AlertContent2Edit'
 const AlertContent = (props:{index:number}) => {
     const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     const AlertOptions = AlertOptionsFunc()
@@ -48,11 +48,11 @@ const AlertContent = (props:{index:number}) => {
    
     if (props.index === 0) {
         return (
-            <AlertContent1 updatedParams={updatedParams}/>
+            <AlertContent1Edit updatedParams={updatedParams}/>
         
         )
     } else if (props.index === 1) {
-        return <AlertContent2 updatedParams={updatedParams}/>
+        return <AlertContent2Edit updatedParams={updatedParams}/>
     }
 
 }
