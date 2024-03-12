@@ -12,7 +12,8 @@ const AlertContent1Read = (props:{data:UserNotificationsType[] | undefined, load
     <div className=' flex flex-col gap-2 max-h-[300px] overflow-y-auto 
      [&::-webkit-scrollbar]:w-2
     [&::-webkit-scrollbar-track]:secondary
-    [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+    [&::-webkit-scrollbar-thumb]:bg-gray-400 drop-shadow-md'
+    >
     
     {   
         props.data ?

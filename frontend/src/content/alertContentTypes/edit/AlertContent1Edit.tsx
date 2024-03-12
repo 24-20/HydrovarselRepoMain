@@ -8,6 +8,7 @@ import AlertInput from '@/components/ui/buttons/AlertInput'
 import parameterMap from '@/maps/parameterMap'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
+import { BookOpen } from 'lucide-react'
 const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     
     const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
@@ -17,7 +18,7 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     
     return (
         <>
-        <h2 >Enkel varsling</h2>
+        <h2 className='flex items-center gap-2' >Enkel varsling <BookOpen size={20} /></h2>
         <div className=' flex items-center flex-col gap-6 flex-grow'>
             
             <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>

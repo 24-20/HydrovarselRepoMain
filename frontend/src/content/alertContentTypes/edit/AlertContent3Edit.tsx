@@ -8,6 +8,7 @@ import AlertInput from '@/components/ui/buttons/AlertInput'
 import parameterMap from '@/maps/parameterMap'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
+import { Hourglass } from 'lucide-react'
 const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
     const [conditional2, setConditional2] = useState<'Øker'| 'Synker'>('Øker')
     const [timeFrame, setTimeFrame] = useState<'1 Time'| '6 Timer'>('6 Timer')
@@ -17,7 +18,7 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
     
     return (
         <>
-        <h2 >Periodisk varsel</h2>
+        <h2 className='flex items-center gap-2' >Periodisk varsel<Hourglass size={16} /></h2>
         <div className=' flex items-center flex-col gap-6 flex-grow'>
             
             <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
