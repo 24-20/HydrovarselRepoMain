@@ -6,7 +6,7 @@ interface CardProps {
   }
 const SidebarAlertCard = ({children, className=''}:CardProps) => {
   return (
-    <div className={cn(className,' w-full flex h-fit bg-card-foreground rounded-lg p-2 gap-1 flex-wrap ')}>
+    <div className={cn(className,' w-full flex h-fit bg-secondary/40 rounded-md gap-1 flex-wrap border border-secondary relative ')}>
     
         {children}
     </div>

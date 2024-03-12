@@ -30,12 +30,12 @@ const CarouselAlert = (props:{carouselApi:CarouselApi, setCarouselApi:((api: Car
     return (
        
 
-        <Carousel className=" shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] rounded-lg w-[96vw] sm:w-[96%] min-w-[300px] min-h-[350px] relative " setApi={props.setCarouselApi}>
+        <Carousel className=" shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] rounded-lg w-[96vw] sm:w-[96%] min-w-[300px] min-h-[380px] relative " setApi={props.setCarouselApi}>
           <CarouselContent className=' h-full'>
-              {Array.from({ length: 5 }).map((_, index) => (
+              {Array.from({ length: 3 }).map((_, index) => (
               <CarouselItem key={index}>
                   
-                  <div className='flex  min-h-[350px] h-full  bg-card rounded-lg items-center flex-col'>
+                  <div className='flex  min-h-[380px] h-full bg-card rounded-lg items-center flex-col'>
                     {<AlertContent index={index}/>}
                     {
                       device600px &&

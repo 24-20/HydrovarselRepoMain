@@ -17,30 +17,22 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
     
     return (
         <>
-        <h2 >Prosentvis varsel</h2>
+        <h2 >Periodisk varsel</h2>
         <div className=' flex items-center flex-col gap-6 flex-grow'>
             
             <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
                 <span>Send meg en</span>
                 <UserActionAlert setActiveOption={userDatacontext.setMethod} activeOption={userDatacontext.method} options={AlertOptions.methodOptions} title='Varslings metode' />
-                <span>hvis</span>
+                <span>hver</span>
+                
+                <UserActionAlert setActiveOption={setTimeFrame} activeOption={timeFrame} options={AlertOptions.timeFrameOptions} title='Tidsvindu' />
+
+                <span>med</span>
                 
                 <UserActionAlert setActiveOption={userDatacontext.setParameter} activeOption={userDatacontext.parameter} options={props.updatedParams} title='Parameter' />
-
                 <span>til</span>
                 <DialogAlert />
                 
-                
-                <UserActionAlert setActiveOption={setConditional2} activeOption={conditional2} options={AlertOptions.conditionalCopy2} title='Betingelse' />
-                <span>med</span>
-                
-                <div className='flex gap-3'>
-                    <AlertInput type='number' placeholder='000' update={userDatacontext.activateAlert} updateState={userDatacontext.setInputValue}/>
-                    <span>%,</span>
-                </div>
-                <span>i løpet av</span>
-                
-                <UserActionAlert setActiveOption={setTimeFrame} activeOption={timeFrame} options={AlertOptions.timeFrameOptions} title='Tidsvindu' />
             </div>
             <PrimaryButton >
                 <div onClick={()=>userDatacontext.setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>

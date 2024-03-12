@@ -9,12 +9,19 @@ import { Battery, BookOpen, BookOpenText, Hourglass, Percent } from 'lucide-reac
 import { CarouselApi } from '../carousel'
 import { userDataContext } from '@/layout/UserAuthLayout'
 import AlertContent1Read from '@/content/alertContentTypes/read/AlertContent1Read'
+import NotificationAmount from '../NotificationAmount'
 const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
   const context = useContext(userDataContext)
   const [current, setCurrent] = useState(0)
   const [activeAccordian, setActiveAccordian] = useState<string| undefined>(undefined)
-
-
+  const [userNotificationsLoading, setuserNotificationsLoading] = useState<boolean>(false)
+  useEffect(()=>{
+    if (context?.userNotifications) {
+      setuserNotificationsLoading(false)
+    } else {
+      setuserNotificationsLoading(true)
+    }
+  },[context?.userNotifications])
   //Carousel and accordian functionality
   useEffect(() => {
     if (!props.carouselApi) {
@@ -43,11 +50,13 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
       <AccordionTrigger onClick={()=>{
         setActiveAccordian('item-1')
         props.carouselApi?.scrollTo(0)
-        }}> <div className=' flex items-center gap-2'><BookOpen size={16} /> Enkel varsling</div></AccordionTrigger>
+        }}> <div className=' flex items-center gap-2'><BookOpen size={16} />
+         Enkel varsel<NotificationAmount>{context?.userNotifications?.[1].length} </NotificationAmount>     
+         </div></AccordionTrigger>
       <AccordionContent>
         {
           context?.authState?
-          <AlertContent1Read data={context.userNotifications?.[1]}/>
+          <AlertContent1Read data={context.userNotifications?.[1]} loading={userNotificationsLoading}/>
           :
           <p>Du må være logget inn</p>
           
@@ -58,42 +67,34 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
       <AccordionTrigger onClick={()=>{
         setActiveAccordian('item-2')
         props.carouselApi?.scrollTo(1)
-        }}><div className=' flex items-center gap-2'><BookOpenText size={16} /> Avansert varsel</div></AccordionTrigger>
+        }}><div className=' flex items-center gap-2'><Percent size={16} /> Prosentvis varsel<NotificationAmount>{context?.userNotifications?.[2].length} </NotificationAmount></div></AccordionTrigger>
       <AccordionContent>
-        Yes. It comes with default styles that matches the other
-        components&apos; aesthetic.
+      {
+          context?.authState?
+          <AlertContent1Read data={context.userNotifications?.[1]} loading={userNotificationsLoading}/>
+          :
+          <p>Du må være logget inn</p>
+          
+        }
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3">
       <AccordionTrigger onClick={()=>{
         setActiveAccordian('item-3')
         props.carouselApi?.scrollTo(2)
-        }}><div className=' flex items-center gap-2'><Percent size={16} /> Prosentvis varsel</div></AccordionTrigger>
+        }}><div className=' flex items-center gap-2'><Hourglass size={16} /> Periodisk varsel<NotificationAmount>{context?.userNotifications?.[3].length} </NotificationAmount></div></AccordionTrigger>
       <AccordionContent>
-        Yes. It&apos;s animated by default, but you can disable it if you
-        prefer.
+      {
+          context?.authState?
+          <AlertContent1Read data={context.userNotifications?.[1]} loading={userNotificationsLoading}/>
+          :
+          <p>Du må være logget inn</p>
+          
+        }
       </AccordionContent>
     </AccordionItem>
-    <AccordionItem value="item-4">
-      <AccordionTrigger onClick={()=>{
-        setActiveAccordian('item-4')
-        props.carouselApi?.scrollTo(3)
-        }}><div className=' flex items-center gap-2'><Hourglass size={16} /> Periodisk varsel</div></AccordionTrigger>
-      <AccordionContent>
-        Yes. It&apos;s animated by default, but you can disable it if you
-        prefer.
-      </AccordionContent>
-    </AccordionItem>
-    <AccordionItem value="item-5">
-      <AccordionTrigger onClick={()=>{
-        setActiveAccordian('item-5')
-        props.carouselApi?.scrollTo(4)
-        }}><div className=' flex items-center gap-2'><Battery size={16} /> Magasin varsel</div> </AccordionTrigger>
-      <AccordionContent>
-        Yes. It&apos;s animated by default, but you can disable it if you
-        prefer.
-      </AccordionContent>
-    </AccordionItem>
+    
+    
     
   </Accordion>
   )

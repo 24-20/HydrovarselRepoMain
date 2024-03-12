@@ -13,6 +13,7 @@ import UserActionAlert from '@/components/ux/UserActionAlert'
 import AlertContent1Edit from './alertContentTypes/edit/AlertContent1Edit'
 import AlertOptionsFunc from './options/AlertOptions'
 import AlertContent2Edit from './alertContentTypes/edit/AlertContent2Edit'
+import AlertContent3Edit from './alertContentTypes/edit/AlertContent3Edit'
 const AlertContent = (props:{index:number}) => {
     const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     const AlertOptions = AlertOptionsFunc()
@@ -53,6 +54,8 @@ const AlertContent = (props:{index:number}) => {
         )
     } else if (props.index === 1) {
         return <AlertContent2Edit updatedParams={updatedParams}/>
+    } else if (props.index === 2) {
+        return <AlertContent3Edit updatedParams={updatedParams}/>
     }
 
 }

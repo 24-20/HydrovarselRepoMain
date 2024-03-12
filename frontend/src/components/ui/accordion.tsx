@@ -27,7 +27,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between py-2 mt-1 transition-all hover:bg-secondary/60 px-2 [&[data-state=open]]:bg-secondary/60 [&[data-state=open]]:rounded-b-none [&[data-state=open]>svg]:text-gray-950 [&[data-state=open]>svg]:rotate-180 border-none text-[16px] rounded-t-lg font-normal",
+        "flex flex-1 outline-none items-center justify-between py-2 mt-1 transition-all hover:bg-gray-300 px-2 [&[data-state=open]]:bg-card-foreground [&[data-state=open]]:rounded-b-none [&[data-state=open]>svg]:text-gray-950 [&[data-state=open]>svg]:rotate-180 border-none text-[16px] rounded-t-lg font-normal",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down bg-secondary/60 px-2 mb-2 rounded-b-lg"
+    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down bg-card-foreground px-2 mb-2 rounded-b-lg"
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>

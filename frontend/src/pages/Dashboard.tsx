@@ -64,7 +64,7 @@ const Dashboard = () => {
   return (
     <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
       
-        <Sidebar className={!device1000px?'left-[-250px]':''}>
+        <Sidebar className={!device1000px?'left-[-300px]':''}>
             <SidebarContent carouselApi={carouselApi}/>
         </Sidebar>
         <Topbar className={' absolute  top-[0]'}>
@@ -74,7 +74,7 @@ const Dashboard = () => {
             <SheetTrigger >
               <div className=' p-2 flex'>Varslinger <ChevronRight /></div>
             </SheetTrigger>
-            <SheetContent side={'left'} className=' w-[250px]'>
+            <SheetContent side={'left'} className=' w-[300px]'>
               <SidebarContent carouselApi={carouselApi}/>
               <SheetClose >
                 <h1>close</h1>
@@ -95,7 +95,6 @@ const Dashboard = () => {
           {
           device1000px&&
           <div className=' flex h-full relative'>
-            
               <TopbarItem> <Plus size={22}/> Ny varsel</TopbarItem>
               <TopbarItem>Mine varsler</TopbarItem>
               <TopbarItem><FontAwesomeIcon icon={faUser}/>Konto</TopbarItem>
@@ -121,7 +120,7 @@ const Dashboard = () => {
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
           setInputValue, setCooldown, setNote, setActivateAlert, activateAlert}}>
-          <DashboardLayout className={`${device1000px?'pl-[250px] pt-6':'pt-[104px]'} mb-6`}>
+          <DashboardLayout className={`${device1000px?'pl-[300px] pt-6':'pt-[104px]'} mb-6`}>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {
