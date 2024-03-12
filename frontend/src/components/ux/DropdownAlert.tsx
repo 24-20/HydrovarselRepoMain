@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/dropdown-menu"
 
 import React, { useEffect, useState } from 'react'
-import AlertButton from "../ui/AlertButton"
+import AlertButton from "../ui/buttons/AlertButton"
 import { optionType } from "@/types/OptionType"
 
 

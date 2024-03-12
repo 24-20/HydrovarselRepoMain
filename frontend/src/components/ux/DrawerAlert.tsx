@@ -12,7 +12,7 @@ import {
 import { Button } from '../ui/button'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AlertButton from "../ui/AlertButton"
+import AlertButton from "../ui/buttons/AlertButton"
 import { optionType } from "@/types/OptionType"
 const DrawerAlert = (props:{options:optionType | null, title:string, update:boolean, updateInstant:boolean, updateState:Function}) => {
   const [activeOption, setActiveOption] = useState<null | string>('')

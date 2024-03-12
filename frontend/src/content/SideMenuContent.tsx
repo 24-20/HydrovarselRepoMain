@@ -1,5 +1,5 @@
-import MenuItemBig from '@/components/ui/MenuItemBig'
-import MenuItemSmall from '@/components/ui/MenuItemSmall'
+import MenuItemBig from '@/components/ui/menu/MenuItemBig'
+import MenuItemSmall from '@/components/ui/menu/MenuItemSmall'
 import { signInWithEandP } from '@/firebase/firebaseUtils'
 import { faHandshake, faSmile } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

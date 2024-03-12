@@ -22,7 +22,7 @@ import { faClock, faUser } from '@fortawesome/free-solid-svg-icons'
 import parameterMap from '@/maps/parameterMap'
 import SideMenuContent from '@/content/SideMenuContent'
 import { ChevronDown, ChevronRight, Menu, Plus } from 'lucide-react'
-import TopbarItem from '@/components/ui/TopbarItem'
+import TopbarItem from '@/components/ui/menu/TopbarItem'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 

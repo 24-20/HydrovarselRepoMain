@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import {
     Accordion,
     AccordionContent,
@@ -6,9 +6,11 @@ import {
     AccordionTrigger,
   } from "@/components/ui/accordion"
 import { Battery, BookOpen, BookOpenText, Hourglass, Percent } from 'lucide-react'
-import { CarouselApi } from './carousel'
-  
+import { CarouselApi } from '../carousel'
+import { userDataContext } from '@/layout/UserAuthLayout'
+import AlertContent1Read from '@/content/alertContentTypes/read/AlertContent1Read'
 const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
+  const context = useContext(userDataContext)
   const [current, setCurrent] = useState(0)
   const [activeAccordian, setActiveAccordian] = useState<string| undefined>(undefined)
 
@@ -44,6 +46,10 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
         }}> <div className=' flex items-center gap-2'><BookOpen size={16} /> Enkel varsling</div></AccordionTrigger>
       <AccordionContent>
         {
+          context?.authState?
+          <AlertContent1Read data={context.userNotifications?.[1]}/>
+          :
+          <p>Du må være logget inn</p>
           
         }
       </AccordionContent>

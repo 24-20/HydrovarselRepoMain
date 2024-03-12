@@ -11,7 +11,7 @@ import {
   
 import { DashboardRiverContext } from '@/pages/Dashboard'
 import { DashboardRiverContextType } from '@/types/DashboardRiverContextType'
-import AlertButton from '@/components/ui/AlertButton'
+import AlertButton from '@/components/ui/buttons/AlertButton'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 const DialogAlert = () => {
     

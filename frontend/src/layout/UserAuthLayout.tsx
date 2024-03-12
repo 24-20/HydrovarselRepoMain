@@ -7,6 +7,7 @@ import {GetNotificationsUser, createUserForDb} from '../firebase/firebaseUtils'
 import {getDoc, doc, onSnapshot} from 'firebase/firestore'
 import { DocumentData } from "firebase/firestore"
 import { userDataContextType } from "@/types/userDataContextType"
+import { UserNotificationsType } from "@/types/UserNotificationsType"
 
 const userDataContext = React.createContext<userDataContextType | null>(null)
 interface CardProps {
@@ -17,7 +18,7 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     const [authState, setAuthState] = useState<boolean>(false)
     const [userData, setuserData] = useState< DocumentData | undefined >(undefined)
     const [userUid, setUserUid] = useState<string | null>(null)
-    const [userNotifications, setUserNotifications] = useState<null | {}[]>(null)
+    const [userNotifications, setUserNotifications] = useState<undefined | {1:UserNotificationsType[], 2:any[], 3:any[], 4:any[]}>(undefined)
     //auth observer
     onAuthStateChanged(auth, ()=>{
         if (auth.currentUser) {
@@ -39,8 +40,6 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
         await createUserForDb(uid)
         updateUserData(uid)
       } else {
-        console.log('--------------')
-        console.log(userDataSnapshot.data())
         setuserData(userDataSnapshot.data())
       }
       
@@ -48,7 +47,6 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     }
     const uid = auth?.currentUser?.uid
     if (uid) {
-        console.log(uid)
         setUserUid(uid)
         updateUserData(uid)
     }
@@ -59,7 +57,7 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     console.log('userdata: ',userData)
     async function getUserNotifications() {
         const data = await GetNotificationsUser(userData?.notificationIds)
-        console.log(data)
+        setUserNotifications(data)
     }
     if (userData) {
         getUserNotifications()
@@ -68,10 +66,11 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
   
 
   return (
-    <userDataContext.Provider value={{userData, authState, userUid}}>
+    <userDataContext.Provider value={{userData, authState, userUid,userNotifications}}>
         {children}
     </userDataContext.Provider>
   )
 }
 
 export default UserAuthLayout
+export {userDataContext}

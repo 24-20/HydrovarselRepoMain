@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 
 import AlertOptionsFunc from '../../options/AlertOptions'
 import DialogAlert from '@/components/ux/DialogAlert'
-import AlertInput from '@/components/ui/AlertInput'
+import AlertInput from '@/components/ui/buttons/AlertInput'
 import parameterMap from '@/maps/parameterMap'
-import PrimaryButton from '@/components/ui/PrimaryButton'
+import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
 const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     

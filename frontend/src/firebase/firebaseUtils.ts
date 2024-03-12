@@ -94,11 +94,12 @@ async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
     for (let i = 0; i<NotificationIds.length;i++) {
         const notifdoc = doc(db, 'Notifications1',NotificationIds[i])
         const notif = await getDoc(notifdoc) 
+        if (!notif.data())console.log(NotificationIds[i])
         const notifdata = notif.data() 
         const updatedNotifObj = {...notifdata, id:NotificationIds[i]}
         //filtering notification after type
         const alerttype = notifdata?.alerttype as '1'|  '2' | '3'|'4'
-        notificationData[alerttype].push(updatedNotifObj)
+        notificationData[alerttype]?.push(updatedNotifObj)
         
     }
     return notificationData    

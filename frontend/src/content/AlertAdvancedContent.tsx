@@ -4,8 +4,8 @@ import { faClock, faGear, faCheck, faEye, faEyeSlash } from '@fortawesome/free-s
 import useDeviceWidth from '@/hooks/useDeviceWidth'
 import DropdownAlert from '@/components/ux/DropdownAlert'
 import DrawerAlert from '@/components/ux/DrawerAlert'
-import AlertButton from '@/components/ui/AlertButton'
-import AlertInput from '@/components/ui/AlertInput'
+import AlertButton from '@/components/ui/buttons/AlertButton'
+import AlertInput from '@/components/ui/buttons/AlertInput'
 import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
 import AlertOptionsFunc from './options/AlertOptions'
 const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings:Function}) => {

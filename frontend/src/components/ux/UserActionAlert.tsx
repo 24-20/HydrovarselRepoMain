@@ -19,7 +19,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AlertButton from "../ui/AlertButton"
+import AlertButton from "../ui/buttons/AlertButton"
 import { optionType } from "@/types/OptionType"
 import useDeviceWidth from '@/hooks/useDeviceWidth'
 const UserActionAlert = (props:{options:optionType | null, title:string, activeOption:string, setActiveOption:Function}) => {
