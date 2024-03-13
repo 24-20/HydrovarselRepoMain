@@ -45,7 +45,7 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
             </div>
           </div>
           <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>
-            <div style={{backgroundColor:checkbox?'hsl(213.12 93.9% 67.84%)':''}} className={' opacity-85 w-6 h-6 bg-background border shadow-md border-border rounded-md transition duration-200 flex justify-center items-center '}
+            <div style={{backgroundColor:checkbox?'hsl(213.12 93.9% 67.84%)':''}} className={' opacity-85 w-6 h-6 bg-background border shadow-md border-border rounded-md transition duration-200 flex justify-center items-center hover:border-2 cursor-pointer '}
             onClick={()=>{setCheckbox(!checkbox)}} ><FontAwesomeIcon icon={faCheck} size='sm' color={checkbox?'#fff':'hsl(0 0% 85%)'} className='transition duration-200' /></div>
             <span className='m-0'>Slett varsel etter det aktiveres.</span>
           </div>

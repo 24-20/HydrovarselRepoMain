@@ -5,11 +5,14 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-import { Battery, BookOpen, BookOpenText, Hourglass, Percent } from 'lucide-react'
+import { Battery, BookOpen, BookOpenText, Hourglass, PauseCircle, Percent, Trash2 } from 'lucide-react'
 import { CarouselApi } from '../carousel'
 import { UserDataContext } from '@/layout/UserAuthLayout'
 import AlertContent1Read from '@/content/alertContentTypes/read/AlertContent1Read'
 import NotificationAmount from '../NotificationAmount'
+import SidebarAlertCard from './SidebarAlertCard'
+import { nanoid } from 'nanoid'
+import parameterMap from '@/maps/parameterMap'
 const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
   const context = useContext(UserDataContext)
   const [current, setCurrent] = useState(0)
@@ -54,15 +57,41 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
          Enkel varsel<NotificationAmount>{context?.userNotifications?.[1].length} </NotificationAmount>     
          </div></AccordionTrigger>
       <AccordionContent>
+        
         {
-          /**
+          
            context?.authState?
-          <AlertContent1Read data={context.userNotifications?.[1]} loading={userNotificationsLoading}/>
+          
+            context?.userNotifications?
+            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
+            [&::-webkit-scrollbar]:w-2
+           [&::-webkit-scrollbar-track]:secondary
+           [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+            
+            
+              {
+              context.userNotifications[2].map(obj=>{
+                return (
+                    <AlertContent1Read data={obj}/>
+                  
+                )
+              })
+            }
+          </div>
+          
           :
-           */
+          //bruker har ingen varslinger
+          <p>Du har ingen varslinger</p>
+          
+          :
+          //bruker er ikke logget inn
           <p>Du må være logget inn</p>
           
         }
+        {
+        userNotificationsLoading&&
+          <p>Loading...</p>
+      }
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">
@@ -71,11 +100,42 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
         props.carouselApi?.scrollTo(1)
         }}><div className=' flex items-center gap-2'><Percent size={16} /> Prosentvis varsel<NotificationAmount>{context?.userNotifications?.[2].length} </NotificationAmount></div></AccordionTrigger>
       <AccordionContent>
+      <div className=' max-h-[300px]'>
       {
           
-          <p>Du må være logget inn</p>
-          
-        }
+          context?.authState?
+         
+           context?.userNotifications?
+           <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
+           [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-track]:secondary
+          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+           
+           
+             {
+             context?.userNotifications[2].map(obj=>{
+               return (
+                   <AlertContent1Read data={obj}/>
+                 
+               )
+             })
+           }
+         </div>
+         
+         :
+         //bruker har ingen varslinger
+         <p>Du har ingen varslinger</p>
+         
+         :
+         //bruker er ikke logget inn
+         <p>Du må være logget inn</p>
+         
+       }
+       {
+       userNotificationsLoading&&
+         <p>Loading...</p>
+     }
+        </div>
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3">
@@ -84,11 +144,42 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
         props.carouselApi?.scrollTo(2)
         }}><div className=' flex items-center gap-2'><Hourglass size={16} /> Periodisk varsel<NotificationAmount>{context?.userNotifications?.[3].length} </NotificationAmount></div></AccordionTrigger>
       <AccordionContent>
-      {
+        <div className=' max-h-[300px]'>
+        {
           
-          <p>Du må være logget inn</p>
-          
-        }
+          context?.authState?
+         
+           context?.userNotifications?
+           <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
+           [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-track]:secondary
+          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+           
+           
+             {
+             context?.userNotifications[2].map(obj=>{
+               return (
+                   <AlertContent1Read data={obj}/>
+                 
+               )
+             })
+           }
+         </div>
+         
+         :
+         //bruker har ingen varslinger
+         <p>Du har ingen varslinger</p>
+         
+         :
+         //bruker er ikke logget inn
+         <p>Du må være logget inn</p>
+         
+       }
+       {
+       userNotificationsLoading&&
+         <p>Loading...</p>
+     }
+        </div>
       </AccordionContent>
     </AccordionItem>
     

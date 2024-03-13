@@ -28,7 +28,7 @@ const DashboardRiverContext = React.createContext<DashboardRiverContextType | nu
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
   const {device600px, device1000px} = useDeviceWidth()
-  const [carouselApi, setCarouselApi] = React.useState<CarouselApi>()
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [stations, setStations] = useState<[] | undefined>()
   const [stationsError, setStationsError] = useState<boolean>(false)
   //DashboardUserAlertData State
@@ -42,6 +42,7 @@ const Dashboard = () => {
     const [deleteAfterTrigger, setDeleteAfterTrigger] = useState<boolean>(false)
     const [riverParameterDataTrue, setRiverParameterDataTrue] = useState<boolean>(false)
     const [recentRiverValue, setRecentRiverValue] = useState(0)
+    const [alertLoading, setAlertLoading] = useState<boolean>(false)
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
   },[])
@@ -120,7 +121,7 @@ const Dashboard = () => {
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError, riverParameterDataTrue}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
-           setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger}}>
+           setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger, alertLoading, setAlertLoading}}>
           <DashboardLayout className={`${device1000px?'pl-[300px] pt-6':'pt-[104px]'} mb-6`}>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>

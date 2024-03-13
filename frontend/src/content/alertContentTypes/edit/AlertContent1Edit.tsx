@@ -8,12 +8,14 @@ import AlertInput from '@/components/ui/buttons/AlertInput'
 import parameterMap from '@/maps/parameterMap'
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, X } from 'lucide-react'
 import { DashboardRiverContext } from '@/pages/Dashboard'
 import { AlertType1Db } from '@/types/AlertTypesDb/AlertType1Db'
 import { UserDataContext } from '@/layout/UserAuthLayout'
 import { useToast } from '@/components/ui/use-toast'
 import { ToastAction } from '@/components/ui/toast'
+
+import PulseLoader from "react-spinners/PulseLoader";
 const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     const { toast } = useToast()
     console.log('running alertcontent1')
@@ -64,48 +66,64 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
             </div>
             {
                 error&&
-                <p className=' text-destructive'>Varsel finnes ikke, legg in gyldig data, kode {error}</p>
+                <p className=' text-destructive'>legg in gyldig data, kode {error}</p>
             }
             <PrimaryButton >
                 <div onClick={()=>{
-                    console.log(userDataContext?.userData)
-                    if (valueLevel ) { //checking if value passes requirements!!!
-                        if (!dashboardRiverContext?.riverParameterDataTrue || !dashboardRiverContext.DashboardRiver) {
-                            setError(2)
-                            return
-                        }
-                        
-                        if (!userDataContext?.authState) {
-                            setError(3)
-                            return
-                        }
-                        console.log('passed reqs')
-                        setUserAlert1(
-                            {
-                                method:userAlertDatacontext.method,
-                                parameter:userAlertDatacontext.parameter,
-                                stationId:dashboardRiverContext.DashboardRiver.stationId,
-                                condition:conditional,
-                                valueLevel:valueLevel,
-                                noteValue:userAlertDatacontext.note,
-                                deleteAfterTrigger:userAlertDatacontext.deleteAfterTrigger,
-                                cooldownAfterTrigger:userAlertDatacontext.cooldown, //6 Timer, 1 Dag
-                                type:1,
+                    if (!userAlertDatacontext.alertLoading) {
 
+                        console.log(userDataContext?.userData)
+                        if (valueLevel ) { //checking if value passes requirements!!!
+                            if (!dashboardRiverContext?.riverParameterDataTrue || !dashboardRiverContext.DashboardRiver) {
+                                setError(2)
+                                return
                             }
-                        )
-                        toast({
-                            variant: "destructive",
-                            title: "Uh oh! Something went wrong.",
-                            description: "There was a problem with your request.",
-                            action: <ToastAction altText="Try again">Try again</ToastAction>,
-                        })
+                            
+                            if (!userDataContext?.authState) {
+                                setError(3)
+                                return
+                            }
+                            console.log('passed reqs')
+                            userAlertDatacontext.setAlertLoading(true)
+                            setError(false)
+                            setUserAlert1(
+                                {
+                                    method:userAlertDatacontext.method,
+                                    parameter:userAlertDatacontext.parameter,
+                                    stationId:dashboardRiverContext.DashboardRiver.stationId,
+                                    condition:conditional,
+                                    valueLevel:valueLevel,
+                                    noteValue:userAlertDatacontext.note,
+                                    deleteAfterTrigger:userAlertDatacontext.deleteAfterTrigger,
+                                    cooldownAfterTrigger:userAlertDatacontext.cooldown, //6 Timer, 1 Dag
+                                    type:1,
+
+                                }
+                            )
+                            
+                            setTimeout(() => {
+                                userAlertDatacontext.setAlertLoading(false)
+                                toast({
+                                    variant: "success",
+                                    title: "Suksess!",
+                                    description: "Enkel varsling ble lagt til!",
+                                    action: <ToastAction altText="Angre varsel">Angre varsel <X size={16} /></ToastAction>,
+                                })
+                                setValueLevel('')
+                            }, 1000);
                     } else {
                         setError(1)
-                        
+                    }
+
+
                     }
                 }} className=' items-center flex flex-grow w-full h-full px-8'>
-                Lagre varsel
+                {
+                    userAlertDatacontext.alertLoading?
+                    <PulseLoader color='white' size={8}/>
+                    :
+                    <div>Lagre varsel</div>
+                }
                 </div>
             </PrimaryButton>
         </div>

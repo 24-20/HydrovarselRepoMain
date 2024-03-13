@@ -12,7 +12,9 @@ export type DashboardUserAlertDataType = {
     parameter:parameterType,
     cooldown:string,
     setDeleteAfterTrigger:Function,
-    deleteAfterTrigger:boolean
+    deleteAfterTrigger:boolean,
+    alertLoading:boolean,
+    setAlertLoading:Function
 
 
 }
