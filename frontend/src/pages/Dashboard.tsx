@@ -23,6 +23,7 @@ import parameterMap from '@/maps/parameterMap'
 import SideMenuContent from '@/content/SideMenuContent'
 import { ChevronDown, ChevronRight, Menu, Plus } from 'lucide-react'
 import TopbarItem from '@/components/ui/menu/TopbarItem'
+import { parameterType } from '@/types/parameterType'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
@@ -34,12 +35,12 @@ const Dashboard = () => {
   
     const [DashboardRiver, setDashboardRiver] = useState<null | AlertRiverType>(null)
     const [method, setMethod] = useState<'Sms'|'Email'>('Email')
-    const [parameter, setParameter] = useState<'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'>('Vannstand')
+    const [parameter, setParameter] = useState<parameterType>('Vannstand')
     const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
-    const [inputValue, setInputValue] = useState<number | null>(null)
     const [cooldown, setCooldown] = useState<string>('1 time')
-    const [note, setNote] = useState<string | null>(null)
-    const [activateAlert, setActivateAlert] = useState(false)
+    const [note, setNote] = useState<string >('')
+    const [deleteAfterTrigger, setDeleteAfterTrigger] = useState<boolean>(false)
+    const [riverParameterDataTrue, setRiverParameterDataTrue] = useState<boolean>(false)
     const [recentRiverValue, setRecentRiverValue] = useState(0)
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
@@ -117,9 +118,9 @@ const Dashboard = () => {
           
         </Topbar>
       
-        <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError}} >
+        <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError, riverParameterDataTrue}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
-          setInputValue, setCooldown, setNote, setActivateAlert, activateAlert}}>
+           setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger}}>
           <DashboardLayout className={`${device1000px?'pl-[300px] pt-6':'pt-[104px]'} mb-6`}>
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
@@ -139,7 +140,7 @@ const Dashboard = () => {
                   {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
                 </div>
               </div>
-              <Graph parameter={parameter} DashboardRiver={DashboardRiver} setRecentRiverValue={setRecentRiverValue}/>
+              <Graph parameter={parameter} DashboardRiver={DashboardRiver} setRecentRiverValue={setRecentRiverValue} setRiverParameterDataTrue={setRiverParameterDataTrue}/>
             </Card>
           </DashboardLayout >
         </DashboardUserAlertDataContext.Provider>

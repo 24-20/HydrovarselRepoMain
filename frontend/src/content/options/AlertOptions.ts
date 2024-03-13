@@ -79,7 +79,16 @@ const AlertOptionsFunc = () => {
         {
             value:'Nedbør',
             icon:faDroplet
-        }
+        },
+        {
+            value:'Grunnvannsnivå - dyp under bakken',
+            icon:faDroplet
+        },
+        {
+            value:'Grunnvannstemperatur',
+            icon:faDroplet
+        },
+
     ]
     const conditionalCopy = [
         {

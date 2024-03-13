@@ -9,7 +9,7 @@ import { DocumentData } from "firebase/firestore"
 import { userDataContextType } from "@/types/userDataContextType"
 import { UserNotificationsType } from "@/types/UserNotificationsType"
 
-const userDataContext = React.createContext<userDataContextType | null>(null)
+const UserDataContext = React.createContext<userDataContextType | null>(null)
 interface CardProps {
     children:ReactNode 
     className?:string // 👈️ marked optional
@@ -66,11 +66,11 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
   
 
   return (
-    <userDataContext.Provider value={{userData, authState, userUid,userNotifications}}>
+    <UserDataContext.Provider value={{userData, authState, userUid,userNotifications}}>
         {children}
-    </userDataContext.Provider>
+    </UserDataContext.Provider>
   )
 }
 
 export default UserAuthLayout
-export {userDataContext}
+export {UserDataContext}

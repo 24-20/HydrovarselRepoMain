@@ -6,5 +6,6 @@ export type DashboardRiverContextType = {
     DashboardRiver:AlertRiverType | null,
     setDashboardRiver:Function,
     stations:stationDataRawType[] | undefined ,
-    stationsError:boolean
+    stationsError:boolean,
+    riverParameterDataTrue:boolean
 }

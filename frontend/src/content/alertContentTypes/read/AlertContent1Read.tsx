@@ -8,6 +8,7 @@ import { Pause, PauseCircle, Trash, Trash2 } from 'lucide-react'
 
 import {nanoid} from 'nanoid'
 const AlertContent1Read = (props:{data:UserNotificationsType[] | undefined, loading:boolean}) => {
+    
   return (
     <div className=' flex flex-col gap-2 max-h-[300px] overflow-y-auto 
      [&::-webkit-scrollbar]:w-2

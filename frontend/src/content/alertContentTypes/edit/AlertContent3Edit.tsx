@@ -36,7 +36,9 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
                 
             </div>
             <PrimaryButton >
-                <div onClick={()=>userDatacontext.setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>
+                <div onClick={()=>{
+                    console.log('clicked')
+                }} className=' items-center flex flex-grow w-full h-full px-8'>
                 Lagre varsel
                 </div>
             </PrimaryButton>

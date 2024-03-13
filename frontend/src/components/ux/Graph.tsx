@@ -17,9 +17,10 @@ import parameterMap from "@/maps/parameterMap";
 import { AlertRiverType } from "@/types/AlertRiverType";
 import { useEffect, useState } from "react";
 import { getMeasurments } from "@/lib/getMesurments";
+import { parameterType } from "@/types/parameterType";
   
 
-  export default function Graph(props:{parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør',DashboardRiver:AlertRiverType | null,setRecentRiverValue:Function}) {
+  export default function Graph(props:{setRiverParameterDataTrue:Function,parameter:parameterType,DashboardRiver:AlertRiverType | null,setRecentRiverValue:Function}) {
       const [data, setData] = useState<{data:{date:string, value:number}[] | [],highest:number,lowest:number}>({data:[],highest:1,lowest:0})
       const [dataError, setDataError] = useState<boolean>(false)
       const CustomTooltip = ({
@@ -45,6 +46,7 @@ import { getMeasurments } from "@/lib/getMesurments";
           let data = await getMeasurments({'StationId':props.DashboardRiver.stationId, 'parameter':parameterMap(props.parameter)[1], 'resolution_time':'60',reference_time:'P31D/'} )
           if (data?.error) {
             setDataError(true)
+            
             return
           } //checing if error
           setDataError(false)
@@ -70,6 +72,10 @@ import { getMeasurments } from "@/lib/getMesurments";
         }
         asyncfunc()
       },[props.DashboardRiver, props.parameter])
+
+      useEffect(()=>{
+        props.setRiverParameterDataTrue(data.data.length>0)
+      },[data])
     
     return (
       <div className=" w-full h-[400px] md:h-[250px]" >

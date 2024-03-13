@@ -5,18 +5,13 @@ interface CardProps {
     type: 'text' | 'number'
     placeholder:string
     updateState:Function
-    update:boolean
+    state:string
   }
-const AlertInput = ({ className='', type, placeholder, updateState, update }:CardProps) => {
-    const [inpv, setInpv] = useState<number | string>('')
-    useEffect(()=>{
-      if (update) {
-        updateState(inpv)
-      }
-    },[update])
+const AlertInput = ({ className='', type, placeholder, updateState, state }:CardProps) => {
+    
     return (
         <input className=' w-[150px] border border-border bg-card-foreground shadow-md px-4 h-[34px] flex gap-2 items-center rounded-lg lg:text-lg'
-         type={type} placeholder={placeholder} value={inpv} onChange={(e)=>setInpv(e.target.value)}/>
+         type={type} placeholder={placeholder} value={state} onChange={(e)=>updateState(e.target.value)}/>
     )
     }
 

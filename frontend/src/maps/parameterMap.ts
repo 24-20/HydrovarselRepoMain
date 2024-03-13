@@ -1,11 +1,8 @@
+import { parameterType } from "@/types/parameterType"
+
 const parameterMap = (
     parameter:
-    'Vannføring'|
-    'Vannstand' |
-    'Vanntemperatur'|
-    'Lufttemperatur'|
-    'Magasinvolum'|
-    'Nedbør'
+    parameterType
     ) => {
         
     const map = {
@@ -14,7 +11,11 @@ const parameterMap = (
     Vanntemperatur:['℃','1003'],
     Lufttemperatur:['℃','17'],
     Magasinvolum:['m³','1004'],
-    Nedbør: ['??','1005']
+    Nedbør: ['??','1005'],
+    Grunnvannstemperatur: ['m','2015'],
+    'Grunnvannsnivå - dyp under bakken':['m','5130']
+
+
 }
 return map[parameter]
 }

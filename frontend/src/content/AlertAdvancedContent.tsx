@@ -15,7 +15,9 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
     const [checkbox, setCheckbox] = useState(false)
   if (!userDatacontext) return
 
-    
+  useEffect(()=>{
+    userDatacontext.setDeleteAfterTrigger(checkbox)
+  },[checkbox])
   return (
     <div className='text-foreground flex flex-col items-center mb-10'>
         <div className=' flex items-center gap-2'><h2 className={`m-${!(props.displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
@@ -33,13 +35,13 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
             <span>Nedkjøling:</span> 
             {
               device600px?
-              <DrawerAlert options={AlertOptions.CooldownOptions} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false} />
+              <DrawerAlert options={AlertOptions.CooldownOptions} title='Varslings metode' state={userDatacontext.cooldown} updateState={userDatacontext.setCooldown} />
               :
-              <DropdownAlert options={AlertOptions.CooldownOptions} title='Varslings metode' updateState={userDatacontext.setMethod} update={userDatacontext.activateAlert} updateInstant={false}/>
+              <DropdownAlert options={AlertOptions.CooldownOptions} title='Varslings metode' state={userDatacontext.cooldown} updateState={userDatacontext.setCooldown}/>
           }
             </div>
             <div className='flex gap-4 mt-6 '>
-              <span>Legg til notat:</span> <AlertInput type='text' placeholder='Noter..' updateState={userDatacontext.setNote} update={userDatacontext.activateAlert} />
+              <span>Legg til notat:</span> <AlertInput type='text' placeholder='Noter..' updateState={userDatacontext.setNote} state={userDatacontext.note} />
             </div>
           </div>
           <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>

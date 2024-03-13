@@ -10,8 +10,11 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
 import { Percent } from 'lucide-react'
 const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
+    console.log('running alertcontent2')
+
     const [conditional2, setConditional2] = useState<'Øker'| 'Synker'>('Øker')
     const [timeFrame, setTimeFrame] = useState<'1 Time'| '6 Timer'>('6 Timer')
+    const [valueLevel, setValueLevel] = useState<string>('')
     const AlertOptions = AlertOptionsFunc()
     const userDatacontext = React.useContext(DashboardUserAlertDataContext)
     if (!userDatacontext) return
@@ -36,7 +39,7 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
                 <span>med</span>
                 
                 <div className='flex gap-3'>
-                    <AlertInput type='number' placeholder='000' update={userDatacontext.activateAlert} updateState={userDatacontext.setInputValue}/>
+                    <AlertInput type='number' placeholder='000' state={valueLevel} updateState={setValueLevel}/>
                     <span>%,</span>
                 </div>
                 <span>i løpet av</span>
@@ -44,7 +47,9 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
                 <UserActionAlert setActiveOption={setTimeFrame} activeOption={timeFrame} options={AlertOptions.timeFrameOptions} title='Tidsvindu' />
             </div>
             <PrimaryButton >
-                <div onClick={()=>userDatacontext.setActivateAlert(true)} className=' items-center flex flex-grow w-full h-full px-8'>
+                <div onClick={()=>{
+                    console.log('clicked')
+                }} className=' items-center flex flex-grow w-full h-full px-8'>
                 Lagre varsel
                 </div>
             </PrimaryButton>
