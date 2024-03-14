@@ -18,7 +18,9 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     const [authState, setAuthState] = useState<boolean>(false)
     const [userData, setuserData] = useState< DocumentData | undefined >(undefined)
     const [userUid, setUserUid] = useState<string | null>(null)
-    const [userNotifications, setUserNotifications] = useState<undefined | {1:UserNotificationsType[], 2:any[], 3:any[], 4:any[]}>(undefined)
+    const [userNotifications, setUserNotifications] = useState<undefined | {1:UserNotificationsType[], 2:UserNotificationsType[], 3:UserNotificationsType[], 4:UserNotificationsType[]}>(undefined)
+    const [userNotificationsMaxItems, setUserNotificationsMaxItems] = useState<undefined | {1:UserNotificationsType[], 2:UserNotificationsType[], 3:UserNotificationsType[], 4:UserNotificationsType[]}>(undefined)
+    
     //auth observer
     onAuthStateChanged(auth, ()=>{
         if (auth.currentUser) {
@@ -57,7 +59,8 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     console.log('userdata: ',userData)
     async function getUserNotifications() {
         const data = await GetNotificationsUser(userData?.notificationIds)
-        setUserNotifications(data)
+        setUserNotifications(data?.full)
+        setUserNotificationsMaxItems(data?.short)
     }
     if (userData) {
         getUserNotifications()
@@ -66,7 +69,7 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
   
 
   return (
-    <UserDataContext.Provider value={{userData, authState, userUid,userNotifications}}>
+    <UserDataContext.Provider value={{userData, authState, userUid,userNotifications, userNotificationsMaxItems}}>
         {children}
     </UserDataContext.Provider>
   )

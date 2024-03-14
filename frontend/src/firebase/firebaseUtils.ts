@@ -87,11 +87,10 @@ async function updateNotificationsIdUser (uid:string, notifId:string) {
     
 }
 async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
-    const notificationData = {1:new Array(), 2:new Array(), 3:new Array(), 4:new Array(),}
 
     if (NotificationIds === undefined) return undefined
 
-    
+    const dataObj = {short:{1:new Array(), 2:new Array(), 3:new Array(), 4:new Array(),},full:{1:new Array(), 2:new Array(), 3:new Array(), 4:new Array(),}}
     const notifdoc = collection(db, 'Notifications1')
     const notif = await getDocs(query(notifdoc, where(documentId(),'in',NotificationIds)))
     notif.forEach((i)=>{
@@ -99,12 +98,15 @@ async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
         const updatedNotifdata = {...notifdata, id:notifdata.id}
         //filtering notification after type
         const alerttype = notifdata?.alerttype as '1'| '2' | '3'|'4'
-        notificationData[alerttype]?.push(updatedNotifdata)
+        dataObj.full[alerttype]?.push(updatedNotifdata)
+        if (!(dataObj.short[alerttype].length>= 3)) {
+            dataObj.short[alerttype]?.push(updatedNotifdata)
+        }
     })
     
         
     
-    return notificationData    
+    return dataObj    
     
     
 }

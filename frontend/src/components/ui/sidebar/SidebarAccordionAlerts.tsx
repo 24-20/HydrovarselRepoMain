@@ -1,23 +1,29 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-import { Battery, BookOpen, BookOpenText, Hourglass, PauseCircle, Percent, Trash2 } from 'lucide-react'
+import {BookOpen, Hourglass, Percent } from 'lucide-react'
 import { CarouselApi } from '../carousel'
 import { UserDataContext } from '@/layout/UserAuthLayout'
 import AlertContent1Read from '@/content/alertContentTypes/read/AlertContent1Read'
 import NotificationAmount from '../NotificationAmount'
-import SidebarAlertCard from './SidebarAlertCard'
-import { nanoid } from 'nanoid'
-import parameterMap from '@/maps/parameterMap'
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
   const context = useContext(UserDataContext)
   const [current, setCurrent] = useState(0)
   const [activeAccordian, setActiveAccordian] = useState<string| undefined>(undefined)
   const [userNotificationsLoading, setuserNotificationsLoading] = useState<boolean>(false)
+  const [userNotificationsUpdated, setuserNotificationsUpdated] = useState<undefined | {1:any[], 2:any[], 3:any[], 4:any[]}>(undefined)
+  const [hasMore, sethasMore] = useState<boolean>(true)
+  function updateUserNotifications() {
+    if (!context?.userNotifications) return
+    setuserNotificationsUpdated(context.userNotifications)
+    sethasMore(false)
+  }
   useEffect(()=>{
     if (context?.userNotifications) {
       setuserNotificationsLoading(false)
@@ -47,6 +53,10 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
     setCurrent(props.carouselApi?.selectedScrollSnap())
   },[])
 
+  //updating
+  useEffect(()=>{
+    setuserNotificationsUpdated(context?.userNotificationsMaxItems)
+  },[context?.userNotifications])
   return (
     <Accordion type="single" className="w-full" defaultValue={activeAccordian} value={activeAccordian} >
     <AccordionItem value="item-1">
@@ -61,23 +71,28 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
         {
           
            context?.authState?
-          
-            context?.userNotifications?
-            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
-            [&::-webkit-scrollbar]:w-2
-           [&::-webkit-scrollbar-track]:secondary
-           [&::-webkit-scrollbar-thumb]:bg-gray-400'>
-            
-            
-              {
-              context.userNotifications[2].map(obj=>{
-                return (
-                    <AlertContent1Read data={obj}/>
-                  
-                )
-              })
-            }
-          </div>
+
+            userNotificationsUpdated && context.userNotifications?
+            <InfiniteScroll className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative[&::-webkit-scrollbar]:w-2[&::-webkit-scrollbar-track]:secondary[&::-webkit-scrollbar-thumb]:bg-gray-400'
+              dataLength={context.userNotifications[1].length}
+              next={updateUserNotifications}
+              hasMore={hasMore}
+              loader={<p>Loading...</p>}
+
+
+              
+              >
+                
+              
+              
+                {
+                  userNotificationsUpdated[1].map(obj=>{
+                    return (
+                        <AlertContent1Read data={obj}/>
+                    )
+                  })
+                }
+          </InfiniteScroll>
           
           :
           //bruker har ingen varslinger
