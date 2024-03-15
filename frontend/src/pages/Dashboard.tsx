@@ -66,12 +66,16 @@ const Dashboard = () => {
   return (
     <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
       
-        <Sidebar className={!device1000px?'left-[-300px]':''}>
+        {
+          device1000px &&
+          <Sidebar>
             <SidebarContent carouselApi={carouselApi}/>
         </Sidebar>
+        }
         <Topbar className={' absolute  top-[0]'}>
           {
             !device1000px&&
+            
           <Sheet >
             <SheetTrigger >
               <div className=' p-2 flex'>Varslinger <ChevronRight /></div>

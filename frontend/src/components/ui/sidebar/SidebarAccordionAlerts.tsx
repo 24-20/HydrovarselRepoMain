@@ -22,7 +22,6 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
   function updateUserNotifications() {
     if (!context?.userNotifications) return
     setuserNotificationsUpdated(context.userNotifications)
-    sethasMore(false)
   }
   useEffect(()=>{
     if (context?.userNotifications) {
@@ -73,7 +72,7 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
            context?.authState?
 
             userNotificationsUpdated && context.userNotifications?
-            <InfiniteScroll className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative[&::-webkit-scrollbar]:w-2[&::-webkit-scrollbar-track]:secondary[&::-webkit-scrollbar-thumb]:bg-gray-400'
+            <InfiniteScroll className='flex flex-col gap-2 max-h-[300px] relative overflow-y-auto relative[&::-webkit-scrollbar]:w-2[&::-webkit-scrollbar-track]:secondary[&::-webkit-scrollbar-thumb]:bg-gray-400'
               dataLength={context.userNotifications[1].length}
               next={updateUserNotifications}
               hasMore={hasMore}
