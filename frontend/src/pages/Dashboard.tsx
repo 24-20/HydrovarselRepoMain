@@ -1,6 +1,5 @@
 import SidebarContent from '@/content/SidebarContent'
 import Card from '@/components/ui/Card'
-import { SheetContent, SheetTrigger, Sheet, SheetClose } from '@/components/ui/sheet'
 import Sidebar from '@/components/ux/Sidebar'
 import Topbar from '@/components/ux/Topbar'
 import useDeviceWidth from '@/hooks/useDeviceWidth'
@@ -17,12 +16,8 @@ import { getStations } from '@/lib/getStations'
 import { DashboardRiverContextType } from '@/types/DashboardRiverContextType'
 import { DashboardUserAlertDataType } from '@/types/DashboardUserAlertData'
 import Graph from '@/components/ux/Graph'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock, faUser } from '@fortawesome/free-solid-svg-icons'
 import parameterMap from '@/maps/parameterMap'
-import SideMenuContent from '@/content/SideMenuContent'
-import { ChevronDown, ChevronRight, Menu, Plus } from 'lucide-react'
-import TopbarItem from '@/components/ui/menu/TopbarItem'
+
 import { parameterType } from '@/types/parameterType'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
@@ -64,7 +59,7 @@ const Dashboard = () => {
 
   const [displaySettings, setDisplaySettings] = useState<boolean>(false)
   return (
-    <div className=' w-full lg:pt-[65px] min-h-screen bg-gradient-to-b from-background from-60% to-card-foreground overflow-x-hidden  '>
+    <>
       
         {
           device1000px &&
@@ -72,56 +67,10 @@ const Dashboard = () => {
             <SidebarContent carouselApi={carouselApi}/>
         </Sidebar>
         }
-        <Topbar className={' absolute  top-[0]'}>
-          {
-            !device1000px&&
-            
-          <Sheet >
-            <SheetTrigger >
-              <div className=' p-2 flex'>Varslinger <ChevronRight /></div>
-            </SheetTrigger>
-            <SheetContent side={'left'} className=' w-[300px]'>
-              <SidebarContent carouselApi={carouselApi}/>
-              <SheetClose >
-                <h1>close</h1>
-              </SheetClose>
-            </SheetContent>
-          </Sheet>
-          }
-          
-          <div className=' flex justify-between h-full gap-2'>
-            <h1 className=' text-white'>Logo</h1>
-            {
-              device1000px&&
-              
-            <TopbarItem><ChevronDown /> Om tjenesten</TopbarItem>
-            }
-          </div>
-          
-          {
-          device1000px&&
-          <div className=' flex h-full relative'>
-              <TopbarItem> <Plus size={22}/> Ny varsel</TopbarItem>
-              <TopbarItem>Mine varsler</TopbarItem>
-              <TopbarItem><FontAwesomeIcon icon={faUser}/>Konto</TopbarItem>
-          </div>
-          }
-          {
-          !device1000px&&
-          <Sheet >
-            <SheetTrigger>
-              <div className=' p-2.5 bg-blue-700 rounded-lg'>
-                  <Menu />
-              </div>
-            </SheetTrigger>
-            <SheetContent side={'right'} className=' max-w-[500px] w-full'>
-            <SideMenuContent/>
-            </SheetContent>
-          </Sheet>
-          }
+        <Topbar className={' absolute  top-[0]'} dashboard={true} carouselApi={carouselApi}/>
           
           
-        </Topbar>
+          
       
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError, riverParameterDataTrue}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
@@ -151,7 +100,7 @@ const Dashboard = () => {
         </DashboardUserAlertDataContext.Provider>
         </DashboardRiverContext.Provider>
         
-    </div>
+    </>
   )
 }
 export {DashboardRiverContext, DashboardUserAlertDataContext}

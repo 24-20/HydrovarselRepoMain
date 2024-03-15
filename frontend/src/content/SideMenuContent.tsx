@@ -8,13 +8,13 @@ import React from 'react'
 const SideMenuContent = () => {
   return (
     <div className=' w-full h-full flex flex-col gap-3 items-center mt-[100px]'>
-        <MenuItemSmall>
+        <MenuItemSmall to='/ny-varsel'>
             Ny varsel
         </MenuItemSmall>
-        <MenuItemSmall>
+        <MenuItemSmall to='/mine-varsel'>
             Mine varsler
         </MenuItemSmall>
-        <MenuItemSmall>
+        <MenuItemSmall to='/konto'>
             Konto
         </MenuItemSmall>
         <div className=' flex gap-2 w-10/12 h-fit mt-[40px]'>

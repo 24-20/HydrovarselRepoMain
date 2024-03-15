@@ -9,7 +9,7 @@ const SidebarContent = (props:{carouselApi:CarouselApi}) => {
   const {device1000px} = useDeviceWidth()
   return (
     <div className=' w-full h-full  flex flex-col relative '>
-        <div className=' px-4 md:pt-[20px] w-full gap-[15px] h-[100%] overflow-y-auto
+        <div className=' px-4 md:pt-[85px] w-full gap-[15px] h-[100%] overflow-y-auto
           [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-gray-100
           [&::-webkit-scrollbar-thumb]:bg-gray-300
