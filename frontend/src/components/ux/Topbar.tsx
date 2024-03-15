@@ -23,7 +23,7 @@ const Topbar = ({className='', dashboard, carouselApi}:CardProps) => {
   
   const {device600px, device1000px} = useDeviceWidth()
   return (
-    <nav className={cn(className, ' text-white fixed z-50 w-screen h-[65px] border-b border-border bg-primary backdrop-blur-sm flex justify-center items-center px-6 sm:px-12  lg:mb-[65px]')}>
+    <nav className={cn(className, ' text-white fixed z-50 w-screen h-[65px] border-b border-border bg-primary backdrop-blur-sm flex justify-center items-center px-6 sm:px-12  mb-[65px]')}>
         <div className='flex justify-between items-center w-full h-full max-w-[1800px]'>
         {
             !device1000px && dashboard&&

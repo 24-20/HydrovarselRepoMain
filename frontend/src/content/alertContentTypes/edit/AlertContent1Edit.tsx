@@ -41,7 +41,7 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     }, [error])
     return (
         <>
-        <h2 className='flex items-center gap-2' >Enkel varsling <BookOpen size={20} /></h2>
+        <h2 className='flex items-center gap-2' >Enkel varsel <BookOpen size={20} /></h2>
         <div className=' flex items-center flex-col gap-6 flex-grow'>
             
             <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
