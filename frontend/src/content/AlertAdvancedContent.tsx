@@ -14,21 +14,20 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
     const {device600px, device1000px} = useDeviceWidth()
     const [checkbox, setCheckbox] = useState(false)
   if (!userDatacontext) return
-
   useEffect(()=>{
     userDatacontext.setDeleteAfterTrigger(checkbox)
   },[checkbox])
   return (
     <div className='text-foreground flex flex-col items-center mb-10'>
-        <div className=' flex items-center gap-2'><h2 className={`m-${!(props.displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
+        <div className=' flex items-center gap-2'><h2 className={`m-${!(!props.displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
           {
             device600px&&
             <div onClick={()=>props.setDisplaySettings((prev:boolean)=>!prev)} className=' p-2 mb-2 bg-card-foreground rounded-lg'>
-            {props.displaySettings?<FontAwesomeIcon icon={faEye}/>:<FontAwesomeIcon icon={faEyeSlash}/>}
+            {!props.displaySettings?<FontAwesomeIcon icon={faEye}/>:<FontAwesomeIcon icon={faEyeSlash}/>}
           </div>
           }
         </div>
-        {(props.displaySettings || !device600px)?
+        {(!props.displaySettings || !device600px)?
         <>
           <div className='flex flex-col'>
             <div className='flex gap-4 '>

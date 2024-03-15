@@ -38,6 +38,9 @@ const Dashboard = () => {
     const [riverParameterDataTrue, setRiverParameterDataTrue] = useState<boolean>(false)
     const [recentRiverValue, setRecentRiverValue] = useState(0)
     const [alertLoading, setAlertLoading] = useState<boolean>(false)
+
+    
+    const [displaySettings, setDisplaySettings] = useState<boolean>(true)
   useEffect(()=>{
     setDashboardRiver(placeholderRiver)
   },[])
@@ -57,7 +60,6 @@ const Dashboard = () => {
     updatestationstate()
   },[])
 
-  const [displaySettings, setDisplaySettings] = useState<boolean>(false)
   return (
     <>
       
