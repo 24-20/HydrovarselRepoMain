@@ -67,45 +67,40 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
          </div></AccordionTrigger>
       <AccordionContent>
         
-        {
+      {
           
-           context?.authState?
-
-            userNotificationsUpdated && context.userNotifications?
-            <InfiniteScroll className='flex flex-col gap-2 max-h-[300px] relative overflow-y-auto relative[&::-webkit-scrollbar]:w-2[&::-webkit-scrollbar-track]:secondary[&::-webkit-scrollbar-thumb]:bg-gray-400'
-              dataLength={context.userNotifications[1].length}
-              next={updateUserNotifications}
-              hasMore={hasMore}
-              loader={<p>Loading...</p>}
-
-
-              
-              >
-                
-              
-              
-                {
-                  userNotificationsUpdated[1].map(obj=>{
-                    return (
-                        <AlertContent1Read data={obj}/>
-                    )
-                  })
-                }
-          </InfiniteScroll>
-          
-          :
-          //bruker har ingen varslinger
-          <p>Du har ingen varslinger</p>
-          
-          :
-          //bruker er ikke logget inn
-          <p>Du må være logget inn</p>
-          
-        }
-        {
-        userNotificationsLoading&&
-          <p>Loading...</p>
-      }
+          context?.authState?
+         
+           context?.userNotifications?
+           <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
+           [&::-webkit-scrollbar]:w-1
+          [&::-webkit-scrollbar-track]:secondary
+          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+           
+           
+             {
+             context?.userNotifications[1].map(obj=>{
+               return (
+                   <AlertContent1Read data={obj}/>
+                 
+               )
+             })
+           }
+         </div>
+         
+         :
+         //bruker har ingen varslinger
+         <p>Du har ingen varslinger</p>
+         
+         :
+         //bruker er ikke logget inn
+         <p>Du må være logget inn</p>
+         
+       }
+       {
+       userNotificationsLoading&&
+         <p>Loading...</p>
+     }
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">
