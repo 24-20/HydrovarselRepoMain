@@ -4,9 +4,11 @@
  
 @layer base {
   :root {
-    --background: 0 0% 95%;
+    --background: 0 0% 90%;
     --foreground: 0 0% 3.9%;
-
+    --alert1 : hsl(221.21 83.19% 53.33%);
+    --alert2 : hsl(47.95 95.82% 53.14%) ;
+    --alert3 : hsl(272.03 61.67% 47.06%);
     --card: 0 0% 100%;
     --card-foreground: 220 14.29% 95.88%;
  

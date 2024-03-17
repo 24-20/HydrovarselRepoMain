@@ -19,6 +19,8 @@ import Graph from '@/components/ux/Graph'
 import parameterMap from '@/maps/parameterMap'
 
 import { parameterType } from '@/types/parameterType'
+import SecondTopbar from '@/components/ux/SecondTopbar'
+import UserHeader from '@/components/ux/UserHeader'
 const DashboardRiverContext = React.createContext<DashboardRiverContextType | null>(null)
 const DashboardUserAlertDataContext = React.createContext<DashboardUserAlertDataType | null>(null)
 const Dashboard = () => { 
@@ -73,7 +75,8 @@ const Dashboard = () => {
           
           
           
-      
+        <SecondTopbar/>
+        <UserHeader />
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError, riverParameterDataTrue}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
            setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger, alertLoading, setAlertLoading}}>

@@ -51,7 +51,7 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
                 
                 <UserActionAlert setActiveOption={userAlertDatacontext.setParameter} activeOption={userAlertDatacontext.parameter} options={props.updatedParams} title='Varslings metode' />
 
-                <span>til</span>
+                <span>ved</span>
                 <DialogAlert />
                 
                 <span>går</span>

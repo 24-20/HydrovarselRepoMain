@@ -31,7 +31,7 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
                 
                 <UserActionAlert setActiveOption={userDatacontext.setParameter} activeOption={userDatacontext.parameter} options={props.updatedParams} title='Parameter' />
 
-                <span>til</span>
+                <span>ved</span>
                 <DialogAlert />
                 
                 

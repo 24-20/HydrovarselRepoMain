@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import parameterMap from '@/maps/parameterMap'
 import { DashboardRiverContext } from '@/pages/Dashboard'
-import useDeviceWidth from '@/hooks/useDeviceWidth'
 import { optionType } from '@/types/OptionType'
 
-import DialogAlert from '@/components/ux/DialogAlert'
-import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
-import AlertInput from '@/components/ui/buttons/AlertInput'
 import { DashboardUserAlertDataContext } from '@/pages/Dashboard'
-import UserActionAlert from '@/components/ux/UserActionAlert'
 import AlertContent1Edit from './alertContentTypes/edit/AlertContent1Edit'
 import AlertOptionsFunc from './options/AlertOptions'
 import AlertContent2Edit from './alertContentTypes/edit/AlertContent2Edit'
