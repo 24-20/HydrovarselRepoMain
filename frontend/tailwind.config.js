@@ -26,6 +26,9 @@ module.exports = {
         alert1:"var(--alert1)",
         alert2:"var(--alert2)",
         alert3:"var(--alert3)",
+        warmgray50:"var(--warm-gray-50)",
+        warmgray100:"var(--warm-gray-100)",
+        warmgray200:"var(--warm-gray-200)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

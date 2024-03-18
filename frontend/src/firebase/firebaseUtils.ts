@@ -1,5 +1,5 @@
-import {auth, db} from './firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {actionCodeSettings, auth, db} from './firebaseConfig'
+import { createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, setDoc, addDoc, updateDoc,  documentId } from "firebase/firestore"; 
 import { collection, query, where, getDocs, getDoc } from "firebase/firestore";
 import { DocumentData } from 'firebase/firestore';
@@ -52,6 +52,26 @@ async function signInWithEandP (email:string, password:string) {
         const user = userCredential.user;
         console.log(user)
         return user
+        // ...
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        
+        console.log(errorMessage)
+        console.log(errorCode)
+        return error
+        // ..
+    });
+}
+async function sendSigninLinkUtil (email:string) {
+    console.log(auth)
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    .then(() => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
         // ...
     })
     .catch((error) => {
@@ -128,4 +148,5 @@ async function AddAlertToDb1 (cool:string | null, del:string | null, met:string 
       });
       return notification.id
 }
-export {createUserWithEandP, signInWithEandP, signOutUtil, createUserForDb, SearchStations, AddAlertToDb1, updateNotificationsIdUser, GetNotificationsUser}
+
+export {sendSigninLinkUtil, createUserWithEandP, signInWithEandP, signOutUtil, createUserForDb, SearchStations, AddAlertToDb1, updateNotificationsIdUser, GetNotificationsUser}

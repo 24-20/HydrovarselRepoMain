@@ -4,9 +4,9 @@ interface SideBarProps {
     children:ReactNode 
     className?:string // 👈️ marked optional
   }
-const DashboardLayout = ({children, className}:SideBarProps) => { //min-h = topbar + secondtopbar
+const DashboardLayout = ({children, className}:SideBarProps) => { //min-h = topbar + secondtopbar + userheader
   return (
-    <div className={cn(className,`w-full lg:min-h-[calc(100vh_-_315px)] h-auto flex flex-col justify-center items-center gap-6 mt-[250px] `)}>
+    <div className={cn(className,`w-full lg:min-h-[calc(100vh_-_515px)] h-auto flex flex-col justify-center items-center gap-6 `)}>
         {
             children
         }

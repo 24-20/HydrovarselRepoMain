@@ -6,6 +6,9 @@
   :root {
     --background: 0 0% 90%;
     --foreground: 0 0% 3.9%;
+    --warm-gray-50: hsl(30, 12.5%, 96.86%);
+    --warm-gray-100: hsl(30, 15.38%, 94.9%);
+    --warm-gray-200: hsl(30, 16.67%, 92.94%);
     --alert1 : hsl(221.21 83.19% 53.33%);
     --alert2 : hsl(47.95 95.82% 53.14%) ;
     --alert3 : hsl(272.03 61.67% 47.06%);
@@ -101,7 +104,7 @@
     opacity: 0.9;
   }
   h3 {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
     margin:0;
   }

@@ -76,11 +76,12 @@ const Dashboard = () => {
           
           
         <SecondTopbar/>
-        <UserHeader />
         <DashboardRiverContext.Provider value={{DashboardRiver, setDashboardRiver, stations, stationsError, riverParameterDataTrue}} >
         <DashboardUserAlertDataContext.Provider value={{setMethod, method, setParameter, parameter ,setConditional, conditional,
            setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger, alertLoading, setAlertLoading}}>
-          <DashboardLayout className={`${device1000px?'pl-[300px] pt-6':'pt-[104px]'} mb-6`}>
+          <DashboardLayout className={`${device1000px?'pl-[300px]':''} mb-6`}>
+            
+        <UserHeader />
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {

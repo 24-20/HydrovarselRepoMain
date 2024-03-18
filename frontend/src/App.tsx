@@ -6,6 +6,7 @@ import { Toaster } from './components/ui/toaster'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import UserVerification from './pages/UserVerification'
 import PagesContainer from './pageLayouts/PagesContainer'
+import Landing from './pages/Landing'
 function App() {
 
   return (
@@ -16,7 +17,7 @@ function App() {
         <Toaster />
         <Routes>
           <Route path='/' element={<PagesContainer/>}>
-            <Route index element={ <div>hello</div>}/>
+            <Route index element={ <Landing />}/>
             <Route path='ny-varsel' element={ <Dashboard />}/>
             <Route path='mine-varsel' element={ <UserAlerts />} />            
             <Route path='verifisering' element={<UserVerification />}/>
