@@ -81,7 +81,7 @@ const Dashboard = () => {
            setCooldown, cooldown, setNote, note, setDeleteAfterTrigger, deleteAfterTrigger, alertLoading, setAlertLoading}}>
           <DashboardLayout className={`${device1000px?'pl-[300px]':''} mb-6`}>
             
-        <UserHeader />
+            <UserHeader />
             <div className=' flex h-fit flex-col-reverse items-center sm:flex-row w-full sm:w-[96%] max-w-[1326px] gap-6'>
               <CarouselAlert carouselApi={carouselApi} setCarouselApi={setCarouselApi}/>
               {

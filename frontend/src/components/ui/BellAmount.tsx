@@ -8,8 +8,8 @@ interface CardProps {
 const BellaAmount = ({amount, className=''}:CardProps) => {
   return (
     <div className='relative h-fit w-fit p-2 pl-0 '  >
-        <Bell />
-        <div className={cn(className,' w-[16px] absolute right-2 top-0 h-[16px] bg-destructive flex items-center justify-center rounded-full text-white font-semibold text-xs ')}>{amount}</div>
+        <Bell size={20} className=' text-[#36393F]' />
+        <div className={cn(className,' w-[14px] absolute right-2 top-0 h-[14px] bg-destructive flex items-center justify-center rounded-full text-white font-semibold text-[9px] ')}>{amount}</div>
     </div>
   )
 }

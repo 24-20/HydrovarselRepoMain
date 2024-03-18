@@ -18,7 +18,7 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
     userDatacontext.setDeleteAfterTrigger(checkbox)
   },[checkbox])
   return (
-    <div className='text-foreground flex flex-col items-center mb-10'>
+    <div className='text-foreground flex flex-col items-center mb-10 '>
         <div className=' flex items-center gap-2'><h2 className={`m-${!(!props.displaySettings || !device600px)&&'0'}`} >Instillinger</h2>
           {
             device600px&&
@@ -29,7 +29,7 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
         </div>
         {(!props.displaySettings || !device600px)?
         <>
-          <div className='flex flex-col'>
+          <div className='flex flex-col items-center'>
             <div className='flex gap-4 '>
             <span>Nedkjøling:</span> 
             {
@@ -46,7 +46,7 @@ const AlertAdvancedContent = (props:{displaySettings:boolean, setDisplaySettings
           <div className='flex items-center gap-4 h-8 sm:mt-10 mt-4 '>
             <div style={{backgroundColor:checkbox?'hsl(213.12 93.9% 67.84%)':''}} className={' opacity-85 w-6 h-6 bg-background border shadow-md border-border rounded-md transition duration-200 flex justify-center items-center hover:border-2 cursor-pointer '}
             onClick={()=>{setCheckbox(!checkbox)}} ><FontAwesomeIcon icon={faCheck} size='sm' color={checkbox?'#fff':'hsl(0 0% 85%)'} className='transition duration-200' /></div>
-            <span className='m-0'>Slett varsel etter det aktiveres.</span>
+            <span className='m-0'>Slett etter aktivert.</span>
           </div>
         </>
         :

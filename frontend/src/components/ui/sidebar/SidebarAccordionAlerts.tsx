@@ -75,7 +75,9 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
            [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:secondary
-          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+          [&::-webkit-scrollbar-thumb]:bg-gray-400
+           bg-gradient-to-b from-white to-card-foreground shadow-inner
+           '>
            
            
              {
@@ -116,9 +118,11 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
          
            context?.userNotifications?
            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
-           [&::-webkit-scrollbar]:w-2
+           [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:secondary
-          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+          [&::-webkit-scrollbar-thumb]:bg-gray-400
+           bg-gradient-to-b from-white to-card-foreground shadow-inner
+           '>
            
            
              {
@@ -159,14 +163,17 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
           context?.authState?
          
            context?.userNotifications?
+           (context.userNotifications[3].length>0)?
            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
-           [&::-webkit-scrollbar]:w-2
+           [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:secondary
-          [&::-webkit-scrollbar-thumb]:bg-gray-400'>
+          [&::-webkit-scrollbar-thumb]:bg-gray-400
+           bg-gradient-to-b from-white to-card-foreground shadow-inner
+           '>
            
            
              {
-             context?.userNotifications[2].map(obj=>{
+             context?.userNotifications[3].map(obj=>{
                return (
                    <AlertContent1Read data={obj}/>
                  
@@ -174,7 +181,9 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
              })
            }
          </div>
-         
+         :
+         //du har null slike varslinger
+         <p>du har ingen periodiske varslinger</p>
          :
          //bruker har ingen varslinger
          <p>Du har ingen varslinger</p>

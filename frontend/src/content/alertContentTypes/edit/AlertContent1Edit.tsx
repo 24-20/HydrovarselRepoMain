@@ -44,7 +44,7 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
         <h2 className='flex items-center gap-2' >Enkel varsel <BookOpen size={20} /></h2>
         <div className=' flex items-center flex-col gap-6 flex-grow'>
             
-            <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3 '>
+            <div className=' 2xl:w-[80%] md:w-[85%] w-[90%] h-auto bg-card flex flex-wrap text-foreground gap-3  '>
                 <span>Send meg en</span>
                 <UserActionAlert setActiveOption={userAlertDatacontext.setMethod} activeOption={userAlertDatacontext.method} options={AlertOptions.methodOptions} title='Varslings metode' />
                 <span>hvis</span>

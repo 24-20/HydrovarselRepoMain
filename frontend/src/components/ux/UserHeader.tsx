@@ -15,12 +15,13 @@ const UserHeader = () => {
           <h3>God dag, Aleksander</h3>
 
           <div className=' flex w-full lg:w-fit gap-6 justify-between'>
-              <div className='flex gap-1 w-fit flex-row items-center'>
-                <Progress value={70} className=' w-[100px] shadow-sm' />
-                <p>7/10</p>
+              <div className='flex gap-2 w-fit flex-row items-center'>
+                
+                <Progress value={70} className=' w-[100px] h-[8px] shadow-sm' />
+                <h4>7/10 </h4>
               </div>
-              <div className='flex gap-1 w-fit flex-row items-center'>
-                <p>varslinger</p>
+              <div className='flex gap-2 w-fit flex-row items-center'>
+                <h4>Nye</h4>
                 <BellaAmount amount={4}/>
               </div>
           </div>

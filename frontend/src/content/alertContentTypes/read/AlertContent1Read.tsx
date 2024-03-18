@@ -24,14 +24,8 @@ const AlertContent1Read = (props:{data:UserNotificationsType}) => {
                 <span>{parameterMap(props.data.parameter)[0]}</span>
             </div>
         </div>
-        <div className=' flex justify-between  w-full pt-2 gap-1 flex-wrap bg-secondary/60 p-2 text-sm'>
-            
-                
-                <div className=' flex gap-1 w-full'>
-                    <span>Notat:</span><div className=' font-semibold'>{props.data?.noteInp?props.data.noteInp:'...'}</div>
-                </div>
-            <div className='flex items-center'>Pause<PauseCircle size={14}/></div>
-            <div className='flex items-center'>Fjern<Trash2 size={14}/></div>
+        <div className=' flex justify-between  w-full pt-2 gap-1 flex-wrap bg-background p-2 text-sm'>
+            <p>Rediger varsel <a href='#' className=' text-blue-600 underline'>her</a></p>
         </div>
     </SidebarAlertCard>
   )
