@@ -91,12 +91,12 @@ const Dashboard = () => {
                 </Card>
               }
             </div>
-            <Card className='  max-w-[1326px] h-fit sm:p-4 py-4 flex-grow-0'>
+            <Card className='  max-w-[1326px] h-fit sm:p-4 py-4 flex-grow-0 border border-border'>
               <div className=' flex justify-between w-full  px-6 my-2 '>
-                <div><h2 className=' m-0 mb-6'>{DashboardRiver?.stationName}</h2></div>
+                <div className='flex gap-2'><h2 className=' m-0 mb-6'>{DashboardRiver?.stationName} </h2><h4>Id: {DashboardRiver?.stationId}</h4></div>
                 <div className=' flex flex-col gap-2 md:gap-6 md:flex-row items-center relative mb-6'>
                   <h4 className=' m-0'>{parameter}</h4>
-                  <h2 className=' m-0 absolute top-6 right-1 text-[34px] w-fit'> { recentRiverValue+parameterMap(parameter)[0]}</h2>
+                  <h2 className=' m-0 absolute top-6 right-1 text-2xl text-primary w-fit font-extrabold'> { recentRiverValue+parameterMap(parameter)[0]}</h2>
                   {/**<div className=' text-xl font-semibold border-border border p-2'>872,23 {parameterMap(parameter)[0]}</div> */}
                 </div>
               </div>

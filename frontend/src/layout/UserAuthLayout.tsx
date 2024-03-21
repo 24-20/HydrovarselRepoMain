@@ -23,8 +23,6 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     
     //auth observer
     onAuthStateChanged(auth, ()=>{
-      console.log('auth state changed')
-      console.log(auth.currentUser)
         if (auth.currentUser) {
         setAuthState(true)
         } else {

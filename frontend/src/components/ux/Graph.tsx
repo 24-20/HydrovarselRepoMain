@@ -18,7 +18,6 @@ import { AlertRiverType } from "@/types/AlertRiverType";
 import { useEffect, useState } from "react";
 import { getMeasurments } from "@/lib/getMesurments";
 import { parameterType } from "@/types/parameterType";
-  
 
   export default function Graph(props:{setRiverParameterDataTrue:Function,parameter:parameterType,DashboardRiver:AlertRiverType | null,setRecentRiverValue:Function}) {
       const [data, setData] = useState<{data:{date:string, value:number}[] | [],highest:number,lowest:number}>({data:[],highest:1,lowest:0})
@@ -30,9 +29,9 @@ import { parameterType } from "@/types/parameterType";
       }: TooltipProps<ValueType, NameType>) => {
         if (active) {
         return (
-            <div className=" bg-card-foreground border border-border shadow-xl p-4 rounded-lg">
-            <h4 className=" text-lg">{`${label}`}</h4>
-            <h2 className="m-0 text-[28px] md:text-[34px] w-fit">{`${payload?.[0]?.value} ${parameterMap(props.parameter)[0]}`}</h2>
+            <div className=" bg-gradient-to-r from-primary/80 to-secondary bg-blur-xl border border-border shadow-xl p-4 rounded-lg">
+              <h2 className=" text-white font-bold m-0 text-xl w-fit">{`${payload?.[0]?.value} ${parameterMap(props.parameter)[0]}`}</h2>
+              <h4 className=" text-white text-md">{`${format(label, "MMM, d")}`}</h4>
             </div>
         );
         }
@@ -82,10 +81,12 @@ import { parameterType } from "@/types/parameterType";
         {
           !dataError && data.data.length>0?
           <ResponsiveContainer >
+            
           <AreaChart data={data.data}>
+            
             <defs>
               <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.8} />
+                <stop offset="0%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={1} />
                 <stop offset="75%" stopColor="hsl(213.12 93.9% 67.84%)" stopOpacity={0.05} />
               </linearGradient>
             </defs>
@@ -96,9 +97,13 @@ import { parameterType } from "@/types/parameterType";
               dataKey="date"
               axisLine={false}
               tickLine={false}
-              tickFormatter={(str) => {
+              style={{
+                fontSize: '0.8rem'
+                }}
+              tickFormatter={(str, index) => {
                 const date = parseISO(str);
-                if (date.getDate() % 7 === 0) {
+                
+                if (index % 31 === 0) {
                   return format(date, "MMM, d");
                 }
                 return "";
@@ -109,9 +114,13 @@ import { parameterType } from "@/types/parameterType";
               dataKey="value"
               axisLine={false}
               tickLine={false}
-              tickCount={8}
+              tickCount={6}
+              interval="preserveEnd"
               tickFormatter={(number) => `${number.toFixed(2)}`}
               domain={[]}
+              style={{
+                fontSize: '0.8rem',
+                }}
             />
   
             <Tooltip content={<CustomTooltip />} />
