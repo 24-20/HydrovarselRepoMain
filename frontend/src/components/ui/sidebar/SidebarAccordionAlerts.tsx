@@ -72,6 +72,7 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
           context?.authState?
          
            context?.userNotifications?
+           (context.userNotifications[1].length>0)?
            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
            [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:secondary
@@ -89,7 +90,9 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
              })
            }
          </div>
-         
+         :
+         //du har null slike varslinger
+         <p>du har ingen prosentvise varslinger</p>
          :
          //bruker har ingen varslinger
          <p>Du har ingen varslinger</p>
@@ -117,6 +120,7 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
           context?.authState?
          
            context?.userNotifications?
+           (context.userNotifications[2].length>0)?
            <div className='flex flex-col gap-2 max-h-[300px] overflow-y-auto relative
            [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:secondary
@@ -134,10 +138,12 @@ const SidebarAccordionAlerts = (props:{carouselApi:CarouselApi}) => {
              })
            }
          </div>
-         
+         :
+         //du har null slike varslinger
+         <p>du har ingen prosentvise varslinger</p>
          :
          //bruker har ingen varslinger
-         <p>Du har ingen varslinger</p>
+         <p></p>
          
          :
          //bruker er ikke logget inn

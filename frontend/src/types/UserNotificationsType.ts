@@ -1,10 +1,15 @@
+import { parameterType } from "./parameterType";
+
 export type UserNotificationsType = {
-    alertVal:string
+    method:'Sms'|'Email' 
+    parameter: parameterType
+    stationId:string
     condition:'Over'| 'Under'
-    cooldown:string
-    deleteAfterTrigger:string
-    method:'Sms'|'Email'
-    parameter:'Vannføring'|'Vannstand'| 'Vanntemperatur'| 'Lufttemperatur' | 'Magasinvolum' | 'Nedbør'
-    river:string
-    [key: string]:string
+    valueLevel:string
+    noteValue:string
+    deleteAfterTrigger:boolean
+    cooldownAfterTrigger:string //6 Timer, 1 Dag
+    email?:string
+    sms?:string
+
   };

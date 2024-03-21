@@ -10,7 +10,6 @@ import PrimaryButton from '@/components/ui/buttons/PrimaryButton'
 import { optionType } from '@/types/OptionType'
 import { Percent } from 'lucide-react'
 const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
-    console.log('running alertcontent2')
 
     const [conditional2, setConditional2] = useState<'Øker'| 'Synker'>('Øker')
     const [timeFrame, setTimeFrame] = useState<'1 Time'| '6 Timer'>('6 Timer')
@@ -39,7 +38,7 @@ const AlertContent2Edit = (props:{updatedParams:optionType | null}) => {
                 <span>med</span>
                 
                 <div className='flex gap-3'>
-                    <AlertInput type='number' placeholder='000' state={valueLevel} updateState={setValueLevel}/>
+                    <AlertInput invalid={false} type='number' placeholder='000' state={valueLevel} updateState={setValueLevel}/>
                     <span>%,</span>
                 </div>
                 <span>i løpet av</span>

@@ -12,6 +12,8 @@ const Landing = () => {
     }}>send link</button>
     </div>
   )
+
+  
 }
 
 export default Landing

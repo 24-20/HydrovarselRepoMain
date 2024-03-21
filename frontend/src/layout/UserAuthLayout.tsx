@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from "react"
 import { onAuthStateChanged } from "firebase/auth"
 import {auth, db }from '../firebase/firebaseConfig'
 import React from "react"
-import {GetNotificationsUser, createUserForDb} from '../firebase/firebaseUtils'
+import {GetNotificationsUser, createUserForDb, signOutUtil} from '../firebase/firebaseUtils'
 import {getDoc, doc, onSnapshot} from 'firebase/firestore'
 import { DocumentData } from "firebase/firestore"
 import { userDataContextType } from "@/types/userDataContextType"
@@ -15,7 +15,7 @@ interface CardProps {
     className?:string // 👈️ marked optional
   }
 const UserAuthLayout = ({children, className=''}:CardProps) => {
-    const [authState, setAuthState] = useState<boolean>(false)
+    const [authState, setAuthState] = useState<boolean | 'loading'>('loading')
     const [userData, setuserData] = useState< DocumentData | undefined >(undefined)
     const [userUid, setUserUid] = useState<string | null>(null)
     const [userNotifications, setUserNotifications] = useState<undefined | {1:UserNotificationsType[], 2:UserNotificationsType[], 3:UserNotificationsType[], 4:UserNotificationsType[]}>(undefined)
@@ -23,6 +23,8 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
     
     //auth observer
     onAuthStateChanged(auth, ()=>{
+      console.log('auth state changed')
+      console.log(auth.currentUser)
         if (auth.currentUser) {
         setAuthState(true)
         } else {
@@ -39,10 +41,18 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
       if (!userDataSnapshot.exists()) {
         console.log('Creating user in db')
         setuserData(undefined)
-        await createUserForDb(uid)
+        
+        let email = window.localStorage.getItem('emailForSignIn');
+        if (!email) {
+          signOutUtil()
+          alert('ingen gyldig email funnet, prøv igjen')
+          return
+        }
+        await createUserForDb(uid, email)
         updateUserData(uid)
       } else {
         setuserData(userDataSnapshot.data())
+        window.localStorage.removeItem('emailForSignIn');
       }
       
       
@@ -69,7 +79,7 @@ const UserAuthLayout = ({children, className=''}:CardProps) => {
   
 
   return (
-    <UserDataContext.Provider value={{userData, authState, userUid,userNotifications, userNotificationsMaxItems}}>
+    <UserDataContext.Provider value={{userData, authState, userUid, userNotifications, userNotificationsMaxItems}}>
         {children}
     </UserDataContext.Provider>
   )

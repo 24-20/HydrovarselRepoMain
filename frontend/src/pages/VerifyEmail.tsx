@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import PulseLoader from 'react-spinners/PulseLoader';
 
 // Confirm the link is a sign-in with email link.
 
 const VerifyEmail = () => {
+    const navigate = useNavigate()
+    const [error, seterror] = useState<undefined | boolean>(undefined)
     useEffect(()=>{
         const auth = getAuth();
         if (isSignInWithEmailLink(auth, window.location.href)) {
@@ -24,7 +27,9 @@ const VerifyEmail = () => {
                 .then((result) => {
                     console.log(result)
                 // Clear email from storage.
-                window.localStorage.removeItem('emailForSignIn');
+                setTimeout(() => {
+                    navigate('/ny-varsel')
+                }, 1000);
                 // You can access the new user via result.user
                 // Additional user info profile not available via:
                 // result.additionalUserInfo.profile == null
@@ -32,6 +37,7 @@ const VerifyEmail = () => {
                 // result.additionalUserInfo.isNewUser
                 })
                 .catch((error) => {
+                    seterror(true)
                     console.error(error)
                 // Some error occurred, you can inspect the code: error.code
                 // Common errors could be invalid email and invalid or expired OTPs.
@@ -40,8 +46,18 @@ const VerifyEmail = () => {
     },[])
   return (
     <div>
-        <h1>Gode greier</h1>
-        <NavLink to={'/ny-varsel'}>ny-varsel</NavLink>
+        {
+            !error?
+            <>
+            <h1>Gode greier</h1>
+            <PulseLoader />
+            </>
+            :
+            <>
+            <h1>Verifisering feilet</h1>
+            <NavLink to={'/ny-varsel'}>returner til forrige side</NavLink>
+            </>
+        }
     </div>
   )
 }

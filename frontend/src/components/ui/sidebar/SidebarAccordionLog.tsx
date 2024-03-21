@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import {
     Accordion,
     AccordionContent,
@@ -6,9 +6,26 @@ import {
     AccordionTrigger,
   } from "@/components/ui/accordion"
 import { Mail, Smartphone } from 'lucide-react'
-  
+  import { UserDataContext } from '@/layout/UserAuthLayout'
 const SidebarAccordionLog = () => {
-    
+    const userdatacontext = useContext(UserDataContext)
+    const [alertLogDataAll, setAlertLogDataAll] = useState<null | {}[]>(null)
+    const [alertLogData1, setAlertLogData1] = useState(null)
+    const [alertLogData2, setAlertLogData2] = useState(null)
+    const [alertLogData3, setAlertLogData3] = useState(null)
+    useEffect(()=>{
+      if (userdatacontext?.userData) {
+        setAlertLogDataAll(userdatacontext.userData.alertLogField)
+      }
+    },[userdatacontext?.userData])
+    useEffect(()=>{
+      console.log(userdatacontext?.userNotifications)
+      if (alertLogDataAll) {
+        for (let i = 0;i<alertLogDataAll.length;i++) {
+
+        }
+      }
+    },[alertLogDataAll])
   return (
     <Accordion type="single" collapsible className="w-full">
     <AccordionItem value="item-1">

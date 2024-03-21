@@ -9,7 +9,6 @@ export type AlertType1Db = {
     noteValue:string
     deleteAfterTrigger:boolean
     cooldownAfterTrigger:string //6 Timer, 1 Dag
-    type:number
     email?:string
     sms?:string
 }

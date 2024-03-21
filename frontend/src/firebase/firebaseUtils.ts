@@ -1,3 +1,4 @@
+import { AlertType1Db } from '@/types/AlertTypesDb/AlertType1Db';
 import {actionCodeSettings, auth, db} from './firebaseConfig'
 import { createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, setDoc, addDoc, updateDoc,  documentId } from "firebase/firestore"; 
@@ -36,11 +37,15 @@ async function createUserWithEandP (email:string, password:string) {
         // ..
     });
 }
-async function createUserForDb (uid:string) {
+async function createUserForDb (uid:string, email:string) {
     await setDoc(doc(db, "Users", uid), {
         plan:'free',
         notificationIds:[],
-        notificationTriggeredCount:0
+        notificationTriggeredCount:0,
+        alertsNotOpenedAmount:0,
+        alertLogField:[],
+        email:email
+
       });
 }
 
@@ -113,9 +118,11 @@ async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
     const dataObj = {short:{1:new Array(), 2:new Array(), 3:new Array(), 4:new Array(),},full:{1:new Array(), 2:new Array(), 3:new Array(), 4:new Array(),}}
     const notifdoc = collection(db, 'Notifications1')
     const notif = await getDocs(query(notifdoc, where(documentId(),'in',NotificationIds)))
-    notif.forEach((i)=>{
-        let notifdata = i.data()
-        const updatedNotifdata = {...notifdata, id:notifdata.id}
+    let index = 0
+    notif.forEach((data)=>{
+        index++
+        let notifdata = data.data()
+        const updatedNotifdata = {...notifdata, id:NotificationIds[index]}
         //filtering notification after type
         const alerttype = notifdata?.alerttype as '1'| '2' | '3'|'4'
         dataObj.full[alerttype]?.push(updatedNotifdata)
@@ -132,18 +139,23 @@ async function GetNotificationsUser (NotificationIds:DocumentData | undefined) {
 }
 
 //-------------------------------------------------
-//Alerts
-async function AddAlertToDb1 (cool:string | null, del:string | null, met:string | null, par:string | null, riv:string | null, con:string | null, ale:string | null, not:string | null ) {
-    console.log(cool, del, met, par, riv, con, ale, not)
+//Alerts cool:string | null, del:string | null, met:string | null, par:string | null, riv:string | null, con:string | null, ale:string | null, not:string | null
+async function AddAlertToDb1 ( alert:AlertType1Db ) {
+    console.log(alert)
+    let timestamp = Date.now();
     const notification = await addDoc(collection(db, "Notifications1"), {
-        cooldown:cool,
-        deleteAfterTrigger:del,
-        method:met,
-        parameter:par,
-        river:riv,
-        condition:con,
-        alertVal:ale,
-        noteInp:not,
+        coolcooldownAfterTriggerdown:alert.cooldownAfterTrigger,
+        deleteAfterTrigger:alert.deleteAfterTrigger,
+        method:alert.method,
+        parameter:alert.parameter,
+        stationId:alert.stationId,
+        condition:alert.condition,
+        valueLevel:alert.valueLevel,
+        noteValue:alert.noteValue,
+        email:alert.email?alert.email:null,
+        sms:alert.sms?alert.sms:null,
+        timestamp,
+        userHasSeen:false,
         alerttype:1
       });
       return notification.id

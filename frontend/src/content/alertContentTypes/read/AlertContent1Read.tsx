@@ -16,11 +16,11 @@ const AlertContent1Read = (props:{data:UserNotificationsType}) => {
             <div className=' font-semibold'>{props.data.parameter}</div>
             
             <span>til</span>
-            <div className=' font-semibold'>{props.data.river}</div>
+            <div className=' font-semibold'>{props.data.stationId}</div>
             <span>går</span>
             <div className=' font-semibold'>{props.data.condition} </div>
             <div className='flex gap-1'>
-                <div className=' font-semibold'>{props.data.alertVal}</div>
+                <div className=' font-semibold'>{props.data.valueLevel}</div>
                 <span>{parameterMap(props.data.parameter)[0]}</span>
             </div>
         </div>

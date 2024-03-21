@@ -16,9 +16,9 @@ import { useToast } from '@/components/ui/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 
 import PulseLoader from "react-spinners/PulseLoader";
+import { AddAlertToDb1, updateNotificationsIdUser } from '@/firebase/firebaseUtils'
 const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     const { toast } = useToast()
-    console.log('running alertcontent1')
     const [conditional, setConditional] = useState<'Over'| 'Under'>('Over')
     const [valueLevel, setValueLevel] = useState<string>('')
     const [userAlert1, setUserAlert1] = useState<null | AlertType1Db>(null)
@@ -28,7 +28,6 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
     const userAlertDatacontext = React.useContext(DashboardUserAlertDataContext)
     const userDataContext = React.useContext(UserDataContext)
     if (!userAlertDatacontext) return
-    useEffect(()=>console.log(userAlert1),[userAlert1])
     useEffect(()=>{
         if (error) {
             const handler = setTimeout(() => {
@@ -39,6 +38,16 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
             }
         }
     }, [error])
+    useEffect(()=>{
+        async function handleAddAlert() {
+            const alertId = await AddAlertToDb1(userAlert1 as AlertType1Db)
+            console.log(alertId)
+            updateNotificationsIdUser(userDataContext?.userUid as string,alertId)
+        }
+        if (userAlert1) {
+            handleAddAlert()
+        }
+    },[userAlert1])
     return (
         <>
         <h2 className='flex items-center gap-2' >Enkel varsel <BookOpen size={20} /></h2>
@@ -68,6 +77,14 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
                 (error === 1)&&
                 <p className=' text-destructive'>legg in gyldig data, kode {error}</p>
             }
+            {
+                (error === 2)&&
+                <p className=' text-destructive'>vannstasjon med parameter ikke gyldig, kode {error}</p>
+            }
+            {
+                (error === 3)&&
+                <p className=' text-destructive'>Bruker er ikke logget på, kode {error}</p>
+            }
             <PrimaryButton >
                 <div onClick={()=>{
                     if (!userAlertDatacontext.alertLoading) {
@@ -96,7 +113,8 @@ const AlertContent1Edit = (props:{updatedParams:optionType | null}) => {
                                     noteValue:userAlertDatacontext.note,
                                     deleteAfterTrigger:userAlertDatacontext.deleteAfterTrigger,
                                     cooldownAfterTrigger:userAlertDatacontext.cooldown, //6 Timer, 1 Dag
-                                    type:1,
+                                    email:'aleksander.a.sivertsen@gmail.com',
+                                    sms:'95656565'
 
                                 }
                             )
