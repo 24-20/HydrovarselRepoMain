@@ -4,6 +4,7 @@ import { UserNotificationsType } from '@/types/UserNotificationsType'
 import { PauseCircle, Trash2 } from 'lucide-react'
 
 import {nanoid} from 'nanoid'
+import { NavLink } from 'react-router-dom'
 const AlertContent1Read = (props:{data:UserNotificationsType}) => {
     
   return (
@@ -25,7 +26,7 @@ const AlertContent1Read = (props:{data:UserNotificationsType}) => {
             </div>
         </div>
         <div className=' flex justify-between  w-full pt-2 gap-1 flex-wrap bg-background p-2 text-sm'>
-            <p>Rediger varsel <a href='#' className=' text-blue-600 underline'>her</a></p>
+            <p>Rediger varsel <NavLink to='/mine-varsel' className=' text-blue-600 underline'>her</NavLink></p>
         </div>
     </SidebarAlertCard>
   )

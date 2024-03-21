@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailA
 import { doc, setDoc, addDoc, updateDoc,  documentId } from "firebase/firestore"; 
 import { collection, query, where, getDocs, getDoc } from "firebase/firestore";
 import { DocumentData } from 'firebase/firestore';
+import { getFirstNameEmail } from '@/lib/utils';
 async function SearchStations () {
     const stationsRef = collection(db, "Stations");
     
@@ -44,7 +45,8 @@ async function createUserForDb (uid:string, email:string) {
         notificationTriggeredCount:0,
         alertsNotOpenedAmount:0,
         alertLogField:[],
-        email:email
+        email:email,
+        name:getFirstNameEmail(email)
 
       });
 }

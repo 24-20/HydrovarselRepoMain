@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { sendSigninLinkUtil } from '@/firebase/firebaseUtils'
 import PulseLoader from 'react-spinners/PulseLoader'
+import { getFirstNameEmail } from '@/lib/utils'
 const UserHeader = () => {
   const userdatacontext = useContext(UserDataContext)
   
@@ -38,7 +39,7 @@ const UserHeader = () => {
           <>
           <UserIcon />
           <div className='flex flex-col lg:flex-row justify-between gap-4 w-full lg:px-0 px-[5%] items-center'>
-              <h3>God dag, Aleksander</h3>
+              <h3>God dag, {userdatacontext.userData?.name}</h3>
 
               <div className=' flex w-full lg:w-fit gap-6 justify-between'>
                   <NavLink to={'/info'} className='flex gap-2 w-fit flex-row items-center bg-black/10 rounded-md px-4'>

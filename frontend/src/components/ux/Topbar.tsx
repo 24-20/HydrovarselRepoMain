@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import React, { ReactNode } from 'react'
 import SideMenuContent from '@/content/SideMenuContent'
-import { ChevronDown, ChevronRight, Menu, Plus } from 'lucide-react'
+import { ChevronDown, ChevronRight, List, ListChecks, Menu, Plus, User } from 'lucide-react'
 import TopbarItem from '@/components/ui/menu/TopbarItem'
 
 import { SheetContent, SheetTrigger, Sheet, SheetClose } from '@/components/ui/sheet'
@@ -13,6 +13,7 @@ import {
   type CarouselApi
 } from "@/components/ui/carousel"
 import { NavLink } from 'react-router-dom'
+import { UserDataContext } from '@/layout/UserAuthLayout'
 
   interface CardProps {
     className?:string // 👈️ marked optional
@@ -20,7 +21,7 @@ import { NavLink } from 'react-router-dom'
     carouselApi?:CarouselApi
   }
 const Topbar = ({className='', dashboard, carouselApi}:CardProps) => {
-  
+  const userdatacontext = React.useContext(UserDataContext)
   const {device600px, device1000px} = useDeviceWidth()
   return (
     <nav className={cn(className, ' text-white fixed z-50 w-screen h-[65px] bg-primary backdrop-blur-sm flex justify-center items-center px-6 sm:px-12  mb-[65px]')}>
@@ -52,8 +53,13 @@ const Topbar = ({className='', dashboard, carouselApi}:CardProps) => {
           device1000px&&
           <div className=' flex h-full relative'>
               <TopbarItem to='/ny-varsel'> <Plus size={22}/> Ny varsel</TopbarItem>
-              <TopbarItem to='/konto'><FontAwesomeIcon icon={faUser}/>Konto</TopbarItem>
-              <TopbarItem to='/mine-varsel'>Mine varsel</TopbarItem>
+              
+              <TopbarItem to='/mine-varsel'> <List size={22}/>Mine varsel</TopbarItem>
+              {
+                userdatacontext?.authState &&
+              <TopbarItem to='/konto'> <User size={22}/> Konto</TopbarItem>
+                
+              }
           </div>
           }
           {
